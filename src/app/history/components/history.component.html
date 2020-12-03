@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-xl-8 col-lg-10 col-md-10  mt-2 offset-xl-2 offset-lg-1 offset-md-1">
+    <div class="col-xl-8 col-lg-10 col-md-10  mt-2 offset-xl-2 offset-lg-1 offset-md-1">
+      <button class="btn btn-primary" (click)="goBackAction()">Regresar</button>
+    </div>
+    <hr class="style-line-separator margin-card-line">
+    <div class="row">
+      <div
+        *ngFor="let order of vQuarantineHistory ; let first = first "
+        class="col-md-6 d-flex p-2 offset-xl-0 offset-lg-0 offset-md-0 offset-sm-1 offset-0 col-sm-10 "
+        style="background: transparent;">
+        <div class="background-card-detail card flex-fill">
+          <div class="row">
+            <div class="col-md-12">
+              <div>
+                <div class="row">
+                  <label class="label-title label-blue">Tipo de Movimiento:
+                    {{order.TipoMovimiento}}</label>
+                </div>
+                <div class="row">
+                  <label class="label-title label-blue">Cant. de Movimiento:
+                    {{order.CantMovimiento}}</label>
+                </div>
+                <div class="row">
+                  <!-- <label class="label-specification"><b>Fecha del pedido:</b>
+                  {{order.FechaCreacion  | date:'shortDate'}}</label> -->
+                  <div class="col-md-5 col-6 p-0">
+                    <label class="label-specification"><b>Fecha de movimiento:</b></label>
+                  </div>
+                  <div class="col-md-7 col-6 p-0 text-right">
+                    <label class="label-specification">{{order.FechaMovimiento}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 col-6 p-0">
+                    <label class="label-specification"><b>Ped. de Compra:</b></label>
+                  </div>
+                  <div class="col-md-7 col-6 p-0 text-right">
+                    <label class="label-specification">{{order.PurchId }}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 col-6 p-0">
+                    <label class="label-specification"><b>Num. de Línea:</b></label>
+                  </div>
+                  <div class="col-md-7 col-6 p-0 text-right">
+                    <label class="label-specification">{{order.LineNum }}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 col-6 p-0">
+                    <label class="label-specification"><b>Cuarentena Ref:</b></label>
+                  </div>
+                  <div class="col-md-7 col-6 p-0 text-right">
+                    <label class="label-specification">{{order.CuarentenaRef}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- <label class="label-specification"><b>Monto Bruto:</b>
+                  {{order.MontoBruto  | currency:masterClientModel.Currency }}</label> -->
+                  <div class="col-md-5 col-6 p-0">
+                    <!-- <label class="label-specification"><b>Monto Bruto:</b></label> -->
+                    <label class="label-specification"><b>Diario Ref:</b></label>
+                  </div>
+                  <div class="col-md-7 col-6 p-0 text-right">
+                    <!-- <label class="label-specification">{{order.MontoBruto  | currency:masterClientModel.Currency }}</label> -->
+                    <label class="label-specification">{{order.JournalId }}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- <label class="label-specification"><b>Descuento:</b>
+                  {{order.MontoDescuento  | currency:masterClientModel.Currency }}</label> -->
+                  <div class="col-md-5 col-4 p-0">
+                    <label class="label-specification"><b>Usuario:</b></label>
+                  </div>
+                  <div class="col-md-7 col-8 p-0 text-right">
+                    <!-- <label
+                    class="label-specification">{{order.MontoDescuento  | currency:masterClientModel.Currency }}</label> -->
+                    <label
+                      class="label-specification">{{order.UserName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loading">
+    <ngx-loading [show]="loading" [config]="{animationType: 'none',backdropBackgroundColour: 'rgba(0, 0, 0, 0.6)'}" [template]="customLoadingTemplate" class="loading">
+      <ng-template #customLoadingTemplate>
+        <div class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+        </div>
+      <!-- <iframe src="https://giphy.com/embed/WiIuC6fAOoXD2" width="100%" height="100%" style="position:absolute; z-index:10000" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->
+    </ng-template>
+    </ngx-loading>
+  </div>
+</div>

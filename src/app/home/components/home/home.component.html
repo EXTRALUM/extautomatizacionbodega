@@ -1,0 +1,21 @@
+<!-- <div class="list-group" *ngFor="let item of optionSelect"> -->
+  <!-- <a href="{{item.OptionDirection}}" class="list-group-item list-group-item-action list-group-item-primary">{{item.OptionName}}</a> -->
+  <!-- <a href="#" class="list-group-item list-group-item-action list-group-item-primary">This is a primary list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">This is a secondary list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-success">This is a success list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-danger">This is a danger list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-warning">This is a warning list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-info">This is a info list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-light">This is a light list group item</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-dark">This is a dark list group item</a> -->
+<!-- </div> -->
+<div class="container">
+  <mat-list>
+    <h2>Menú Principal</h2>
+    <mat-list-item (click)="goToDirection(item.OptionDirection)" *ngFor="let item of optionSelect; last as last">
+       <mat-icon mat-list-icon>home_work</mat-icon>
+       <h4 mat-line>{{item.OptionName}}</h4>
+       <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>

@@ -1,0 +1,152 @@
+/*******************************************************
+  * Author: mmora
+  * Creation date: 19/08/2019
+  * Description:  Definition of variables for font family open sans, bold, regular, semibold, extrabold and light
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+
+$opensans-bold: 'Open Sans Bold';
+$opensans-extrabold: 'Open Sans ExtraBold';
+$opensans-regular: 'Open Sans Regular';
+$opensans-semibold: 'Open Sans SemiBold';
+
+/*******************************************************
+  * Author: mmora
+  * Creation date: 19/08/2019
+  * Description:  Definition of variables for font size in rem
+  ****************************************************
+  * Modifications:
+  -Josue Somarribas: added font-size-biggest
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+
+$font-size-small: 0.8rem; // this size is the equivalent for 16px
+$font-size-medium: 1.5rem; //this size is the equivalent for 24px
+$font-size-big: 1.8rem; // this is the equivalent for 36px
+$font-size-bigger: 3.3rem; // this is the equivalent for 54px
+$font-size-biggest: 5rem; // this is the equivalent for 81px
+
+/*******************************************************
+  * Author: mmora
+  * Creation date: 19/08/2019
+  * Description: section where we import the different types of font family we are using
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+
+@font-face {
+  font-family: 'Open Sans Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: local('Open Sans Regular'), url('../../../assets/fonts//OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: local('Open Sans SemiBold'), url('../../../assets/fonts/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: local('Open Sans Bold'), url('../../../assets/fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans ExtraBold';
+  font-style: normal;
+  font-weight: 800;
+  font-display: block;
+  src: local('Open Sans ExtraBold'), url('../../../assets/fonts/OpenSans-ExtraBold.ttf') format('truetype');
+}
+
+
+/*******************************************************
+  * Author: mmora
+  * Creation date: 19/08/2019
+  * Description:  Definition of colors
+
+  ****************************************************
+  * Modifications
+  ****************************************************
+*/
+
+$primary-blue: #009FE3;
+$primary-orange: #ff7043;
+$light-blue:#62d0ff;
+$dark-blue: #0071b1;
+
+/*Star number 01*/
+
+$primary-pink: #e73571;
+$light-pink:#ff6e9f;
+$dark-pink: #af0046;
+$white: #FFFFFF;
+$red-dark: #9F0005;
+
+/*end number 01*/
+
+//$light-gray:#8B8B8B;
+$gray: #BDBDBD;
+$light-gray: #E0E0E0;
+$color-gray-soft: #5A5A5A;
+$light-gray-softer: #DADADA;
+$light-gray-background: #E5E5E5;
+$backgroun-page:rgba(224, 224, 224, 0.4);
+$background-dark-gray:#EEEEEE;
+
+$blue-title: #001B36;
+$black:#000000;
+$light-black: #212121;
+
+$blue-background-label: #004B8D;
+$red-background-label:#D9272D;
+
+
+/*******************************************************
+  * Author: mmora
+  * Creation date: 20/08/2019
+  * Description:  routes of images
+
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+
+$img-login-background-blue: url('assets/img/login-background-blue.png');
+$img-login-background: url('assets/img/background-login.png');
+$img-login-background-white: url('assets/img/login-background-white.svg');
+$img-email: url('assets/img/icon-email.svg');
+$img-modal-logo: url('assets/img/Logo_modal.svg');
+$img-save-success: url('assets/img/img-save-success.svg');
+$img-bim-extralum-logo: url('assets/img/Logo-BIM-Extralum-40.svg');
+$img-bim-alone-logo: url('assets/img/Logo-BIM-Extralum-2-Full-Color.svg');

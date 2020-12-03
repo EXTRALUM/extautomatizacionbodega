@@ -1,0 +1,1088 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./app/core/styes/variables.scss";
+// @import '~@ngx-share/button/themes/default/default-theme';
+/* You can add global styles to this file, and also import other style files */
+
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: "Open Sans Regular", Roboto, "Helvetica Neue", sans-serif;
+}
+
+.primary-color {
+  color: $primary-orange;
+}
+
+.primary-pink {
+  color: $primary-pink;
+}
+
+/*******************************************************
+  * Author: Mariam Mora
+  * Creation date: 27/08/2019
+  * Description:  class that defines the styles of background
+
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+
+.background-login {
+  width: 100vw;
+  height: 100vh;
+  // background-image: $img-login-background;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  display: flex;
+}
+
+/*******************************************************
+  * Author: Mariam Mora
+  * Creation date: 27/08/2019
+  * Description:  class that defines the styles of the logo extralum
+
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+.logo-Extralum-modal {
+  max-height: 20vh;
+  height: 6rem;
+  width: 15rem;
+  background-repeat: no-repeat;
+  display: block;
+  margin: auto;
+  background-size: contain;
+  margin: 0.5rem auto;
+  // background-image: $img-modal-logo;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 50px !important;
+}
+
+.row {
+  margin: 0;
+}
+
+.content-scroll {
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.row-not-margin {
+  margin: 0;
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  position: fixed;
+  top: 0;
+}
+
+.card-center-login {
+  width: 50vw;
+  height: 78vh;
+  position: initial;
+  display: block;
+  margin: auto !important;
+}
+
+.button-custom {
+  font-family: $opensans-bold;
+  font-size: $font-size-small;
+  color: #fff !important;
+  border: none;
+  background-color: $blue-background-label !important;
+  border-radius: 0.25rem;
+  margin: 1rem 0 !important;
+  width: inherit;
+  padding: 0.5rem 0.5rem;
+  outline: none !important;
+}
+
+.card-main-container {
+  background: $white;
+  position: relative;
+  border-radius: 7px;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-content {
+  //position:fixed;
+  float: right;
+  //display: flex;
+  //justify-content: right;
+  //align-items: right;
+}
+
+.right-content-button {
+  position: absolute;
+  float: right;
+  right: 0;
+  //display: flex;
+  //justify-content: right;
+  //align-items: right;
+}
+
+.center-vertically {
+  display: flex;
+  align-items: center;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.m-header {
+  margin-top: 3rem !important;
+}
+
+.form-control-text-aling-center {
+  text-align: center !important;
+}
+
+.form-control-text-aling-left {
+  text-align: left;
+}
+
+.form-control-text-aling-right {
+  text-align: right;
+}
+
+.form-control-text-justify {
+  text-align: justify;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.style-separator {
+  border: 0.8px solid #e0e0e0;
+  width: auto;
+  margin: 0 0 2rem;
+}
+
+.button-access-background {
+  background: $blue-background-label !important;
+}
+
+.button-ready-background {
+  background: $red-background-label !important;
+}
+
+.checkBox-Link {
+  color: $blue-background-label !important;
+  text-decoration-line: underline;
+}
+
+.label-blue {
+  color: $blue-background-label !important;
+}
+
+.label-red {
+  color: $red-background-label !important;
+}
+
+.label-white {
+  color: $white !important;
+}
+
+.label-black {
+  color: $light-black;
+}
+
+.cursor-link {
+  cursor: pointer;
+}
+
+.label-title-modal {
+  font-size: 1.2rem;
+  font-family: $opensans-bold;
+  color: $blue-title;
+  margin: 0.5rem 0;
+}
+
+.lbl-subtitle-modal {
+  font-size: $font-size-small;
+  font-family: $opensans-semibold;
+  color: $blue-title;
+  margin: 0 0 0.5rem;
+}
+
+.label-description {
+  font-size: 1rem;
+  font-family: $opensans-regular;
+  margin: 0 0 0.5rem;
+}
+
+.label-card {
+  font-size: 0.9rem;
+  font-family: $opensans-regular;
+  margin: 0.5rem 0.5rem 0;
+}
+
+.label-title {
+  font-size: 1.2rem;
+  font-family: $opensans-semibold;
+  color: $blue-title;
+}
+
+.container-carousel {
+  margin: 0 auto 1rem !important;
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+}
+
+.display-row {
+  display: flex;
+}
+
+.background-gray {
+  background: $backgroun-page;
+}
+
+.background-dark-gray {
+  background: $background-dark-gray;
+}
+
+.align-item {
+  align-items: normal !important;
+}
+
+.align-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-description {
+  padding: 1rem 0 0;
+  border-top: 1px solid $gray;
+  background: #eeeeee;
+}
+
+.container-dotted-steps {
+  width: fit-content;
+  background: $light-gray;
+  border-radius: 4px;
+  border: dotted;
+  padding: 0.5rem 4rem;
+  margin: 2rem auto;
+}
+
+.general-button-options {
+  font-family: $opensans-regular;
+  font-size: $font-size-small;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  width: auto !important;
+  padding: 0.45rem 1rem;
+  outline: none !important;
+}
+
+.style-button-steps-active {
+  border: 6px solid $blue-background-label;
+  font-family: $opensans-bold;
+  padding: 0.8rem 1.2rem;
+  border-radius: 100%;
+  background: $white;
+  color: $red-background-label;
+  margin: 1rem 1.5rem 0.5rem;
+  outline: none !important;
+}
+
+.style-button-steps-disabled {
+  border: 6px solid $color-gray-soft;
+  font-family: $opensans-bold;
+  padding: 0.8rem 1.2rem;
+  border-radius: 100%;
+  background: $white;
+  color: $color-gray-soft;
+  margin: 1rem 1.5rem 0.5rem;
+  outline: none !important;
+  cursor: auto !important;
+}
+
+a {
+  color: #004b8d;
+  font-size: 0.9rem;
+}
+
+.display-responsive {
+  display: none !important;
+}
+
+.label-descriprion-responsive {
+  font-size: $font-size-small;
+  font-family: $opensans-regular;
+}
+
+.container-table {
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 19/11/2019
+   * Description: SCSS for the style for background and social media icons.
+   * **********************************************************/
+.cart-style {
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.card-carousel {
+  width: 18vw;
+  min-width: 18vw;
+}
+
+/* **********************************************************/
+
+.style-separator-dotted-step {
+  border: 1px dotted #bdbdbd;
+  width: auto;
+}
+
+.title-position {
+  position: absolute;
+}
+
+.productdetail-button-options {
+  font-family: $opensans-regular;
+  font-size: $font-size-small;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  margin: 0 0 1rem;
+  width: auto !important;
+  padding: 0.45rem 0.5rem;
+  outline: none !important;
+}
+
+.color-icon-edit {
+  color: #0096d6;
+}
+
+.align-content-step {
+  display: flex;
+  justify-content: center;
+}
+
+.label-steps {
+  font-size: 0.85rem;
+  font-family: $opensans-regular;
+  margin: 0 0 0.5rem;
+  color: $blue-title;
+}
+
+.label-radio {
+  font-size: $font-size-small;
+  font-family: $opensans-regular;
+  margin: 0;
+}
+
+.label-conditions {
+  font-size: 0.85rem;
+  font-family: $opensans-regular;
+  display: block;
+  color: $color-gray-soft;
+}
+
+.style-breadcrumb {
+  margin: 1.5rem 0 0;
+  background: transparent;
+  font-size: 0.9rem;
+}
+
+.label-form {
+  font-family: $opensans-regular;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.label-title-form {
+  font-size: 1.2rem;
+  font-family: $opensans-bold;
+  color: $black;
+  margin: 1.2rem 0;
+}
+
+.align-content-left {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: left;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.m-icons {
+  margin-right: 1rem;
+}
+
+.w-steps {
+  width: 7vw;
+}
+
+.display-steps {
+  display: table-caption;
+}
+
+.size-img {
+  width: 16vw;
+}
+
+.border-image {
+  border-bottom: 1px solid #dadada;
+  min-width: 16vw;
+  min-height: 18vw;
+  max-height: 18vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.style-arrow-back {
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.heigth-label-card {
+  height: 2.65rem;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 28/10/2019
+   * Description: SCSS for the style for container carousel cards.
+   * **********************************************************/
+.container {
+  max-width: calc(100vw - 22vw);
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 28/10/2019
+   * Description: SCSS for the style for loading.
+   * **********************************************************/
+.backdrop {
+  position: fixed !important;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 28/10/2019
+   * Description: SCSS for the style for container style product description.
+   * **********************************************************/
+.label-size {
+  //min-height: 6vh;
+  min-height: calc(6vh - 0.5rem - 0.4rem);
+  display: block;
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 17/12/2019
+   * Description: SCSS for the style for modal shopping card responsive.
+   * **********************************************************/
+.shopping-modal .mat-dialog-container {
+  padding: 0;
+
+  .mat-dialog-container {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 28/10/2019
+   * Description: SCSS for the style for modal filter web.
+   * **********************************************************/
+// .filter-screen-filter .mat-dialog-container {
+
+  // background: linear-gradient(0deg, rgba(227,249,255,1) 0%, rgba(0,113,177,1) 100%);
+  // background: linear-gradient(0deg, rgba(227,249,255,1) 0%, rgba(0,75,141,1) 100%);
+  // background: linear-gradient(0deg, rgba(227,249,255,1) 0%, rgba(0,75,141,0.9559174011401436) 100%);
+  // background: linear-gradient(0deg, rgba(227,249,255,1) 0%, rgba(0,75,141,0.9054972330729166) 100%);
+  // background: linear-gradient(0deg, rgba(227,249,255,1) 0%, rgba(0,75,141,0.8438725832129726) 100%);
+
+// }
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 28/10/2019
+   * Description: SCSS for the style for modal filter responsive, and differents modal.
+   * **********************************************************/
+.full-screen .mat-dialog-container {
+  max-width: 100vw;
+  max-height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  border-radius: 0;
+  padding: 0;
+  background: $background-dark-gray;
+
+  .mat-dialog-content {
+    height: 100%;
+    max-height: 85% !important;
+  }
+}
+
+.without-padding .mat-dialog-container {
+  padding: 0;
+}
+
+.saveSuccess-container .mat-dialog-container {
+  padding: 1.5rem;
+}
+
+.style-container-ProjectDetail .mat-dialog-container {
+  max-width: 100vw;
+  max-height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  border-radius: 0;
+  padding: 0;
+  background: $light-gray-background;
+
+  .mat-dialog-content {
+    height: 100%;
+    max-height: 85% !important;
+  }
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 24/10/2019
+   * Description: SCSS for the style for pagination.
+   * **********************************************************/
+.ngx-pagination .current {
+  border-radius: 50%;
+  background: $blue-background-label !important;
+}
+
+.ngx-pagination li {
+  font-size: 0.8rem;
+  font-family: $opensans-regular;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+  font-size: 0.85rem;
+  font-family: $opensans-regular;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+  border-radius: 50%;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 11/10/2019
+   * Description: SCSS for the style for radio button.
+   * **********************************************************/
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #004b8d !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: #004b8d !important;
+}
+
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+.mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+  background: #004B8D !important;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #004B8D !important;
+}
+
+.mat-checkbox-label {
+  white-space: normal;
+  text-align: center;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 18/09/2019
+   * Description: SCSS for the style input text.
+   * **********************************************************/
+.form-control {
+  font-size: 0.85rem;
+  background: $light-gray !important;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 18/09/2019
+   * Description: SCSS for the style ::-webkit-scrollbar style for second header of products.
+   * **********************************************************
+ */
+.button-panel-option {
+  font-family: $opensans-bold;
+  font-size: $font-size-small;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  margin: 0.5rem 0 !important;
+  width: 95%;
+  padding: 0.4rem 0.5rem;
+  outline: none !important;
+}
+
+.background-glass {
+  background: #004a8d;
+}
+
+.background-aluminum {
+  background: $gray;
+}
+
+.background-accessories {
+  background: $red-background-label;
+}
+
+.background-systems {
+  background: #00954b;
+}
+
+.background-air {
+  background: #0096d6;
+}
+
+.background-white {
+  background: $white;
+  box-shadow: 2px 3px 3px 0px #cecaca;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 12/09/2019
+   * Description: SCSS for the style for alert in step section.
+   * **********************************************************
+ */
+.alert-steps {
+  background: rgba(43, 43, 43, 0.9);
+  color: $white;
+  position: fixed;
+  bottom: 0;
+  margin: 0;
+  width: 100%;
+  z-index: 1;
+  border-radius: 0;
+}
+
+.label-alert-step {
+  font-size: 0.85rem;
+  font-family: $opensans-regular;
+}
+
+.height-container {
+  min-height: 90.45vh;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 12/09/2019
+   * Description: SCSS for the style scroll style.
+   * **********************************************************
+ */
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #626262;
+  border-radius: 10px;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 12/09/2019
+   * Description: SCSS for the style carousel cards.
+   * **********************************************************
+ */
+.btn-outline-secondary:hover {
+  background: $light-gray;
+}
+
+.btn-outline-secondary {
+  background: #ecf0f3;
+  color: #004b8d !important;
+  padding: 0.2rem 0.5rem;
+}
+
+.fa-lg {
+  font-size: 1em;
+}
+
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex !important;
+}
+
+.style-button-controls {
+  padding: 1rem;
+  text-align: right;
+}
+
+.margin-card-line {
+  margin: 0.5rem;
+}
+
+.card-body-padding {
+  padding: 0.5rem;
+}
+
+.col-padding {
+  padding: 0.5rem;
+}
+
+.margin-carousel {
+  margin: 0 0.5rem;
+}
+
+/*******************************************************
+  * Author: Mariam Mora
+  * Creation date:11/09/2019
+  * Description:  class that defines the styles customize the star rating
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+
+input[type="radio"] {
+  display: none;
+}
+
+.size-stars {
+  font-size: 1.2rem;
+  margin: 0;
+  color: $gray;
+  padding: 0 0.15rem;
+}
+
+input[type="radio"]:checked~.size-stars {
+  color: #ffd84e;
+}
+
+.qualification {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.mat-badge-medium.mat-badge-overlap.mat-badge-after .mat-badge-content {
+  right: -10px;
+  top: -6px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+/*******************************************************
+  * Author: Mariam Mora
+  * Creation date: 27/08/2019
+  * Description:  class that defines the styles customize the select
+
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+.select-input-style {
+  padding: 0 0.5rem !important;
+}
+
+.mat-select {
+  font-size: 0.7rem;
+  font-family: $opensans-bold;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+input:focus,
+textarea:focus,
+ngb-rating:focus,
+button:focus {
+  outline: 0ch !important;
+  box-shadow: none !important;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 1/10/2019
+   * Description: SCSS for the style section of media queries.
+   * **********************************************************
+ */
+@media only screen and (max-width: 600px) {
+  .border-image {
+    border-bottom: 1px solid #dadada;
+    min-width: 16vw;
+    min-height: 80vw;
+    max-height: 80vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .label-description {
+    font-size: 0.85rem;
+  }
+
+  .label-card {
+    font-size: $font-size-small;
+  }
+
+  .style-button-steps-disabled {
+    padding: 0.6rem 1.1rem;
+  }
+
+  .style-button-steps-active {
+    padding: 0.6rem 1.1rem;
+  }
+
+  .label-steps {
+    font-size: $font-size-small;
+  }
+
+  .label-title {
+    font-size: 1rem;
+  }
+
+  .label-description {
+    font-size: 0.85rem;
+  }
+
+  .label-conditions {
+    font-size: $font-size-small;
+  }
+
+  .orderlist-button {
+    font-size: 0.9rem;
+  }
+
+  .display-responsive {
+    display: flex !important;
+  }
+
+  a {
+    font-size: 0.8rem;
+  }
+
+  .breadcrumb-item.active {
+    font-size: 0.75rem;
+  }
+
+  .style-breadcrumb {
+    margin: 1rem 0 0;
+  }
+
+  .label-title-form {
+    font-size: 0.9rem;
+  }
+
+  .label-form {
+    font-size: 0.8rem;
+  }
+
+  .label-form-forgotpassword {
+    font-size: 0.8rem;
+  }
+
+  .alert-steps {
+    padding: 0.5rem;
+  }
+
+  .r-button-align {
+    text-align: center;
+  }
+
+  .label-alert-step {
+    font-size: 0.75rem;
+  }
+
+  .style-separator {
+    margin: 0px 0 0.5rem;
+  }
+
+  .w-steps {
+    width: 30vw;
+  }
+
+  .size-img {
+    width: 78vw;
+  }
+
+  .icon-arrow-left,
+  .icon-arrow-right {
+    color: $color-gray-soft;
+    font-size: 37px;
+    height: 37px !important;
+    width: 37px !important;
+    font-weight: bold;
+  }
+}
+
+// .cdk-overlay-pane {
+//   -webkit-animation: animacionMostrarModal ease-out;
+//   animation: animacionMostrarModal ease-out;
+//   -webkit-animation-duration: 300ms;
+//   animation-duration: 300ms;
+//   -webkit-animation-fill-mode: forwards;
+//   animation-fill-mode: forwards;
+// }
+
+// .mostrar-modal {
+//   -webkit-animation: animacionMostrarModal ease-out;
+//   animation: animacionMostrarModal ease-out;
+//   -webkit-animation-duration: 300ms;
+//   animation-duration: 300ms;
+//   -webkit-animation-fill-mode: forwards;
+//   animation-fill-mode: forwards;
+// }
+
+// @-webkit-keyframes animacionMostrarModal {
+//   0% {
+//       opacity: 0;
+//       -webkit-transform: scale(0.4);
+//       transform: scale(0.4);
+//   }
+//   70% {
+//       opacity: 1;
+//       -webkit-transform: scale(1.2);
+//       transform: scale(1.1);
+//   }
+//   100% {
+//       opacity: 1;
+//       -webkit-transform: scale(1);
+//       transform: scale(1);
+//   }
+// }
+
+// .ocultar-modal {
+//   -webkit-animation: animacionOcultarModal ease-out;
+//   animation: animacionOcultarModal ease-out;
+//   -webkit-animation-duration: 300ms;
+//   animation-duration: 300ms;
+//   -webkit-animation-fill-mode: forwards;
+//   animation-fill-mode: forwards;
+// }
+
+// @-webkit-keyframes animacionOcultarModal {
+//   0% {
+//       opacity: 1;
+//       -webkit-transform: scale(1);
+//       transform: scale(1);
+//   }
+//   70% {
+//       opacity: 1;
+//       -webkit-transform: scale(1.2);
+//       transform: scale(1.1);
+//   }
+//   100% {
+//       opacity: 0;
+//       -webkit-transform: scale(0.4);
+//       transform: scale(0.4);
+//   }
+// }
+
+@media (min-width: 1900px) {
+  .container {
+    max-width: calc(100vw - 23vw);
+  }
+}

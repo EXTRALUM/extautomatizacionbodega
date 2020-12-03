@@ -1,0 +1,20 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title> Inicio de Sesión </mat-card-title>
+    </mat-card-header>
+    <form [formGroup]='loginForm' class="example-form">
+      <mat-card-content>
+        <img mat-card-image url="../../../../assets/img/Extralum.png">
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput placeholder="Nombre de Usuario" formControlName="UserId">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input type="password" matInput placeholder="Contraseña" formControlName="Password" (keyup.enter)="login()">
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button class="btn-block" type="submit" (click)="login()">Ingresar</button>
+    </form>
+  </mat-card>
+</div>

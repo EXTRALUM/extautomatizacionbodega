@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <!-- <div class="row row-not-margin mx-auto center-content">
+    <mat-icon class=" feedback-icon"
+      [ngClass]="{'success': status == 'success', 'error': status == 'error', 'warning': status == 'warning'}">{{icon}}
+    </mat-icon>
+  </div> -->
+  <div class="row row-not-margin">
+    <h5 class="feedback-modal-title w-100">{{labelTitile}}</h5>
+  </div>
+  <div class="row row-not-margin center-content" style="max-width: 38vw;">
+    <!-- <div class="col-md-12"> -->
+    <label class="feedback-modal-description w-100">{{textDescription}}</label>
+    <!-- </div> -->
+  </div>
+  <div class="row row-not-margin mt-3 center-content">
+    <!-- <div class="col-md-12"> -->
+    <div class="mx-auto">
+      <button mat-flat-button mat-dialog-close class="btn btn-primary ">Aceptar</button>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>

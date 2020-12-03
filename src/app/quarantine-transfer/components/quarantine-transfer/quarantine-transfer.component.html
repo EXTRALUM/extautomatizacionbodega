@@ -1,0 +1,108 @@
+<div class="container-fluid">
+  <form>
+    <!-- <h2> Traslado de Cuarentena</h2> -->
+    <div class="form-row">
+      <div class="form-group col-9">
+        <h2> Traslado de Cuarentena</h2>
+        <!-- <label mat-label for="inputBodegaOrigen">Seleccione la bodega:</label> -->
+        <!-- <select id="inputBodegaOrigen" class="form-control" (change)="getSelectedLocationOrigen($event)">
+          <option selected>Seleccione bodega</option>
+          <option *ngFor="let item of locationList; let i = index" [value]="locationList[i].LocationId">
+            {{item.LocationId}} - {{item.LocationName}}
+          </option>
+        </select> -->
+      </div>
+      <div class="form-group col-3">
+        <button class="btn btn-primary" (click)="OpenModalLocations()">
+          <mat-icon>home_work</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="itemId">Pedido de Compra*</label>
+        <input type="text" class="form-control" id="pedidoCompra" placeholder="Pedido de compra" (change)="getItemInformation()">
+      </div>
+      <div class="form-group col-6">
+        <label for="itemId">Num. de Línea*</label>
+        <input type="number" class="form-control" id="numLinea" placeholder="Num. de Linea" (change)="getItemInformation()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-xs-12">
+        <label> {{itemInformation.ItemId}} </label>
+      </div>
+      <div class="form-group col-xs-3">
+        <label> {{itemInformation.ItemName}} </label>
+      </div>
+      <div class="form-group col-xs-5">
+        <label> {{itemInformation.Color}} - {{itemInformation.Size}}</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="inputUbicacionDestino">Num. de Factura</label>
+        <input type="text" class="form-control" id="numFactura" placeholder="Núm. de Factura" (change)="getQtyInformation()">
+      </div>
+      <div class="form-group col-6">
+        <label for="inputUbicacionDestino">Ubicación Destino*</label>
+        <input type="text" class="form-control" id="ubicacionDestino" placeholder="Ubicación Destino">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="inputCantidad">Cantidad Recibida</label>
+        <input type="number" class="form-control" id="cantRecibida" readonly="true" value="{{cantRecibida}}">
+      </div>
+      <div class="form-group col-6">
+        <label for="inputCantidad">Cantidad Original</label>
+        <input type="number" class="form-control" id="cantFacturada" readonly="true" value="{{cantFacturada}}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="inputCantidad">Cantidad a Recibir*</label>
+        <input type="number" class="form-control" id="cantRecibir" (change)="qtyDiferencia()">
+      </div>
+      <div class="form-group col-6">
+        <label for="inputCantidad">Diferencia</label>
+        <input type="number" class="form-control" id="cantDiferencia" readonly="true" value="{{cantDiferencia}}">
+      </div>
+    </div>
+    <div class="form-row">
+      <!-- <div class="form-group col-xs-2">
+        <button class="btn btn-primary">Diario</button>
+      </div>
+      <div class="form-group col-xs-2">
+        <button class="btn btn-secondary">Agregar </button>
+      </div> -->
+      <div class="form-group col-4">
+        <button class="btn btn-primary" (click)="quarantineProcess()">Registrar </button>
+      </div>
+      <div class="form-group col-4">
+        <button type="button" class="btn btn-secondary" (click)="QuarantineHistory()">Historial </button>
+      </div>
+      <div class="form-group col-2">
+        <button type="button" class="btn btn-secondary" (click)="goBackAction()">Regresar </button>
+      </div>
+    </div>
+    <div class="loading">
+      <ngx-loading [show]="loading" [config]="{animationType: 'none',backdropBackgroundColour: 'rgba(0, 0, 0, 0.6)'}" [template]="customLoadingTemplate" class="loading">
+        <ng-template #customLoadingTemplate>
+          <div class="sk-cube-grid">
+              <div class="sk-cube sk-cube1"></div>
+              <div class="sk-cube sk-cube2"></div>
+              <div class="sk-cube sk-cube3"></div>
+              <div class="sk-cube sk-cube4"></div>
+              <div class="sk-cube sk-cube5"></div>
+              <div class="sk-cube sk-cube6"></div>
+              <div class="sk-cube sk-cube7"></div>
+              <div class="sk-cube sk-cube8"></div>
+              <div class="sk-cube sk-cube9"></div>
+          </div>
+        <!-- <iframe src="https://giphy.com/embed/WiIuC6fAOoXD2" width="100%" height="100%" style="position:absolute; z-index:10000" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->
+      </ng-template>
+      </ngx-loading>
+    </div>
+  </form>
+</div>

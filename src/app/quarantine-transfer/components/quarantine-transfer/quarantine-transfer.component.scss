@@ -1,0 +1,89 @@
+@import'../../../core/styes/variables.scss';
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 18/12/2019
+   * Description: SCSS for the contact us.
+   * **********************************************************
+*/
+:host {
+  display: flex;
+  // justify-content: center;
+  margin: 70px 0px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.content-height {
+  height: calc(90vh - 3rem - 3rem);
+}
+
+.display-query {
+  display: grid;
+}
+
+.style-textarea {
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  font-size: 0.85rem;
+  background: #E0E0E0 !important;
+  padding: 0.5rem 1rem;
+  height: 30vh;
+}
+
+.separating-line-contactus {
+  margin: 0.5rem 0;
+}
+
+.label-title-contact-us {
+  font-family: $opensans-regular;
+  color: #424242;
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.label-questions {
+  font-family: $opensans-regular;
+  color: #424242;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.label-input {
+  font-family: $opensans-regular;
+  color: #424242;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.pt-contac-us {
+  padding-top: 3rem;
+}
+
+.pandding-button {
+  padding: 2rem 0 1rem 0;
+}
+
+/**************************************************************
+   * Author: Mariam Mora
+   * Creation date: 19/12/2019
+   * Description: SCSS for the style section of media queries for device less than 1400px.
+   */
+@media (max-width:1400px) {
+  .content-height {
+    height: auto;
+  }
+
+  .pt-contac-us {
+    padding-top: 1rem;
+  }
+
+  .pandding-button {
+    padding: 0.5rem 0 1rem 0;
+  }
+}
+

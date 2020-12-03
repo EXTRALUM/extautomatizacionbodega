@@ -1,0 +1,112 @@
+@import "../../../core/styes/variables.scss";
+
+/*******************************************************
+  * Author: Andres Sibaja
+  * Creation date: 08/10/2019
+  * Description: this class set de styles of the buttons of the modal
+
+
+  ****************************************************
+  * Modifications
+  ****************************************************
+  * Number:
+  * Date:
+  * Ticket:
+  * Author:
+  * Description:
+*******************************************************/
+.button {
+  background-color: #009FE4 !important;
+  border: none !important;
+  display: block !important;
+  margin: auto !important;
+  width: 52% !important;
+  height: 46px !important;
+  border-radius: 4rem !important;
+  color: #fff !important;
+  margin-bottom: 2% !important;
+}
+
+/*******************************************************
+  * Author: Andres Sibaja
+  * Creation date: 08/10/2019
+* Description: this class set the styles of the title of the modal
+
+
+****************************************************
+* Modifications
+****************************************************
+* Number:
+* Date:
+* Ticket:
+* Author:
+* Description:
+*******************************************************/
+.title-modal {
+  text-align: center;
+}
+
+/*******************************************************
+  * Author: Andres Sibaja
+  * Creation date: 08/10/2019
+* Description: this class set the styles of the subtitle of the modal
+
+
+****************************************************
+* Modifications
+****************************************************
+* Number:
+* Date:
+* Ticket:
+* Author:
+* Description:
+*******************************************************/
+.subtitle-modal {
+  text-align: center;
+}
+
+.feedback-modal-title {
+  font-family: $opensans-bold;
+  font-size: $font-size-medium;
+  color: black;
+  text-align: center;
+}
+
+.feedback-modal-description {
+  font-family: $opensans-regular;
+  font-size: $font-size-small;
+  color: gray;
+  line-height: 1.6rem;
+  text-align: center;
+}
+
+::ng-deep.feedback-icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 8.43rem !important;
+  width: 8rem !important;
+  font-size: 127px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: $dark-blue;
+}
+
+.warning {
+  color: #ffc107;
+}
+
+.button-check {
+  width: 8rem;
+  background-color: $primary-blue;
+  color: #ffffff;
+  border-radius: 7px;
+  outline: none !important;
+}

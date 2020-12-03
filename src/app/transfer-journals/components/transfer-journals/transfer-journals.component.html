@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <form>
+    <!-- <h2> Diarios de Transferir</h2> -->
+    <div class="form-row">
+      <div class="form-group col-9">
+        <!-- <label mat-label for="inputBodegaOrigen">Seleccione la bodega:</label> -->
+        <h2> Diarios de Transferir</h2>
+        <!-- <select id="inputBodegaOrigen" class="form-control" (change)="getSelectedLocationOrigen($event)">
+          <option selected>Seleccione bodega</option>
+          <option *ngFor="let item of locationList; let i = index" [value]="locationList[i].LocationId">
+            {{item.LocationId}} - {{item.LocationName}}
+          </option>
+        </select> -->
+      </div>
+      <div class="form-group col-3">
+        <button class="btn btn-primary" (click)="OpenModalLocations()">
+          <mat-icon>home_work</mat-icon>
+          <!-- <mat-icon>add-location</mat-icon> -->
+        </button>
+      </div>
+    </div>
+    <!-- <div class="form-row">
+    </div> -->
+    <div class="form-row">
+      <div class="form-group col-12">
+        <label for="itemId">Código Artículo*</label>
+        <input matInput type="text" class="form-control" id="itemId" placeholder="Código de Barra" (change)="getItemInformation()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-xs-2">
+        <label> {{itemInformation.ItemId}} </label>
+      </div>
+      <div class="form-group col-xs-5">
+        <label> {{itemInformation.ItemName}} </label>
+      </div>
+      <div class="form-group col-xs-5">
+        <label> {{itemInformation.Color}} - {{itemInformation.Style}}</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="inputUbicacionOrigen">Ubicación Origen*</label>
+        <input type="text" class="form-control" id="ubicacionOrigen" placeholder="Ubicación Origen">
+      </div>
+      <div class="form-group col-6">
+        <label for="inputLoteOrigen">Lote Origen</label>
+        <input type="text" class="form-control" id="loteOrigen" placeholder="Lote Origen">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="inputUbicacionDestino">Ubicación Destino*</label>
+        <input type="text" class="form-control" id="ubicacionDestino" placeholder="Ubicación Destino">
+      </div>
+      <div class="form-group col-6">
+        <label for="inputLoteDestino">Lote Destino</label>
+        <input type="text" class="form-control" id="loteDestino" placeholder="Lote Destino">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="inputCantidad">Cantidad*</label>
+        <input type="number" class="form-control" id="inputCantidad">
+      </div>
+    </div>
+    <div class="form-row">
+      <!-- <div class="form-group col-xs-2">
+        <button class="btn btn-primary">Diario</button>
+      </div> -->
+      <div class="form-group col-xs-2">
+        <button class="btn btn-secondary" (click)="journalProcess(0)">Agregar </button>
+      </div>
+      <div class="form-group col-xs-2">
+        <button class="btn btn-primary" (click)="journalRegister()">Registrar </button>
+      </div>
+      <div class="form-group col-2">
+        <button type="button" class="btn btn-secondary" (click)="goBackAction()">Regresar </button>
+      </div>
+    </div>
+    <div class="loading">
+      <ngx-loading [show]="loading" [config]="{animationType: 'none',backdropBackgroundColour: 'rgba(0, 0, 0, 0.6)'}" [template]="customLoadingTemplate" class="loading">
+        <ng-template #customLoadingTemplate>
+          <div class="sk-cube-grid">
+              <div class="sk-cube sk-cube1"></div>
+              <div class="sk-cube sk-cube2"></div>
+              <div class="sk-cube sk-cube3"></div>
+              <div class="sk-cube sk-cube4"></div>
+              <div class="sk-cube sk-cube5"></div>
+              <div class="sk-cube sk-cube6"></div>
+              <div class="sk-cube sk-cube7"></div>
+              <div class="sk-cube sk-cube8"></div>
+              <div class="sk-cube sk-cube9"></div>
+          </div>
+        <!-- <iframe src="https://giphy.com/embed/WiIuC6fAOoXD2" width="100%" height="100%" style="position:absolute; z-index:10000" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> -->
+      </ng-template>
+      </ngx-loading>
+    </div>
+  </form>
+</div>

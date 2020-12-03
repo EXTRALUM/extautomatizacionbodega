@@ -1,0 +1,58 @@
+<!-- <div class="container-fluid">
+</div> -->
+
+<div class="container-fluid modal-error">
+  <div class="row row-not-margin mx-auto center-content">
+    <mat-icon class="feedback-icon">home_work</mat-icon>
+  </div>
+  <div class="row row-not-margin">
+    <h5 class="feedback-modal-title">Seleccione la(s) bodega(s)</h5>
+  </div>
+  <div class="row row-not-margin center-content">
+    <div class="col-12">
+      <!-- <label for="inputBodegaOrigen">Bodega Origen</label> -->
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput type="text" placeholder="Bodega Origen" aria-label="Number" [formControl]="myControlOrigen" [matAutocomplete]="auto" [value]="locationOrigen">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsOrigen | async" [value]="option.LocationId" (onSelectionChange)="getSelectedLocationOrigen(option)">
+              {{option.LocationName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <!-- <select id="inputBodegaOrigen" class="form-control" (change)="getSelectedLocationOrigen($event)">
+        <option selected>Seleccione bodega</option>
+        <option *ngFor="let item of locationListOrigen; let i = index" [value]="locationListOrigen[i].LocationId">
+          {{item.LocationId}} - {{item.LocationName}}
+        </option>
+      </select> -->
+    </div>
+    <div class="col-12" *ngIf="showLocationDestino === true">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput type="text" placeholder="Bodega Destino" aria-label="Number" [formControl]="myControlDestino" [matAutocomplete]="auto" [value]="locationDestino">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptionsDestino | async" [value]="option.LocationId" (onSelectionChange)="getSelectedLocationDestino(option)">
+              {{option.LocationName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <!-- <label for="inputBodegaOrigen">Bodega Destino</label>
+      <select id="inputBodegaOrigen" class="form-control" (change)="getSelectedLocationDestino($event)">
+        <option selected>Seleccione bodega</option>
+        <option *ngFor="let item of locationListDestino; let i = index" [value]="locationListDestino[i].LocationId">
+          {{item.LocationId}} - {{item.LocationName}}
+        </option>
+      </select> -->
+    </div>
+  </div>
+  <div class="row row-not-margin mt-3 center-content">
+    <!-- <div class="col-md-12"> -->
+    <div class="mx-auto">
+      <button mat-dialog-close class="btn btn-primary" (click)="saveLocations()">Aceptar</button>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>
