@@ -188,6 +188,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
             }
           }
         );
+      this.loading = false;
     }
   }
 
