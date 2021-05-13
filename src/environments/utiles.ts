@@ -17,7 +17,7 @@ export class utiles {
   // tslint:disable-next-line: typedef
   static clearCacheUser() {
     localStorage.removeItem('login');
-    localStorage.removeItem('journalLine');
+    // localStorage.removeItem('journalLine');
     localStorage.removeItem('quarantineLine');
     localStorage.removeItem('locationOrigen');
     localStorage.removeItem('locationDestino');

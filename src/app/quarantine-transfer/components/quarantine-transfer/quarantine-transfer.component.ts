@@ -113,7 +113,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     let isCorrect = true;
     let login = new LoginModel();
     // tslint:disable-next-line: one-variable-per-declaration
-    let qty, numLinea, pedidoCompra, ubicacionDestino;
+    let qty, numLinea, pedidoCompra, ubicacionDestino, cantFacturado;
 
     locationOrigen = utiles.getCacheLocationQuarantine();
     qty = (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber;
@@ -121,6 +121,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     pedidoCompra = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
     locationOrigen = utiles.getCacheLocationQuarantine();
     ubicacionDestino = (document.getElementById('ubicacionDestino') as HTMLInputElement).value;
+    cantFacturado = (document.getElementById('cantFacturada') as HTMLInputElement).valueAsNumber;
 
     if (locationOrigen === undefined || locationOrigen === null) {
       this.modelInformation('Error', 'No se ha seleccionado una bodega de cuarentena');
@@ -151,6 +152,12 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     if (isCorrect) {
       if (isNaN(qty)) {
         this.modelInformation('Error', 'Se debe escribir una cantidad a ingresar');
+        isCorrect = false;
+      }
+    }
+    if (isCorrect) {
+      if (cantFacturado === 0) {
+        this.modelInformation('Error', 'No hay cantidades disponibles para recibir');
         isCorrect = false;
       }
     }
