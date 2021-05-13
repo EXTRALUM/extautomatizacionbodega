@@ -34,6 +34,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   journalList: Journal[];
   loading: boolean;
   processRegister: number;
+  journalIdGeneral: string;
 
   // ======================
   bodegaOrigen: string;
@@ -73,6 +74,34 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
     if (journalIdCache !== null) {
       this.journalIdGeneral = journalIdCache;
+    }
+    this.getLocationAvailable();
+
+    let journalCache = utiles.getCacheJournal();
+
+    if (journalCache) {
+      journalCache.forEach(element => {
+        // tslint:disable-next-line: prefer-const
+        let journalLocalIM = new Journal();
+        journalLocalIM.ItemId = element.ItemId;
+        journalLocalIM.BodegaDestino = element.BodegaDestino;
+        journalLocalIM.BodegaOrigen = element.BodegaOrigen;
+        journalLocalIM.Cantidad = element.Cantidad;
+        journalLocalIM.Color = element.Color;
+        journalLocalIM.ItemId = element.ItemId;
+        journalLocalIM.JournalId = element.JournalId;
+        journalLocalIM.LoteDestino = element.LoteDestino;
+        journalLocalIM.LoteOrigen = element.LoteOrigen;
+        journalLocalIM.Size = element.Size;
+        journalLocalIM.Style = element.Style;
+        journalLocalIM.UbicacionDestino = element.UbicacionDestino;
+        journalLocalIM.UbicacionOrigen = element.UbicacionOrigen;
+        journalLocalIM.UserId = element.UserId;
+
+        this.journalIdGeneral = element.JournalId;
+
+        this.journalList.push(journalLocalIM);
+      });
     }
   }
 
@@ -162,6 +191,11 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       this.bodegaOrigen = locationOrigen.LocationId;
     } else {
       this.modelInformation('Error', 'Se debe seleccionar la bodega origen');
+      isCorrect = false;
+    }
+
+    if (this.ubicacionOrigen === this.ubicacionDestino && this.loteOrigen === this.loteDestino) {
+      this.modelInformation('Error', 'Tanto las ubicaciones como los lotes deben ser distinos, por favor revisar la información');
       isCorrect = false;
     }
 
@@ -294,11 +328,13 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
                 (document.getElementById('inputCantidad') as HTMLInputElement).valueAsNumber = 0;
                 (document.getElementById('itemId') as HTMLInputElement).value = '';
+                this.journalIdGeneral = this.journalResponse.JournalId;
 
                 this.itemInformation.ItemId = '';
                 this.itemInformation.ItemName = '';
                 this.itemInformation.Color = '';
                 this.itemInformation.Size = '';
+                this.itemInformation.Style = '';
 
                 if (this.journalResponse.Message === 'Se ha registrado el diario de manera correcta') {
                   utiles.clearCacheJournalId();
@@ -375,11 +411,14 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
                 (document.getElementById('inputCantidad') as HTMLInputElement).valueAsNumber = 0;
                 (document.getElementById('itemId') as HTMLInputElement).value = '';
+                utiles.clearCacheJournal();
+                this.journalIdGeneral = '';
 
                 this.itemInformation.ItemId = '';
                 this.itemInformation.ItemName = '';
                 this.itemInformation.Color = '';
                 this.itemInformation.Size = '';
+                this.itemInformation.Style = '';
 
                 if (this.journalResponse.Message === 'Se ha registrado el diario de manera correcta') {
                   this.journalIdGeneral = '';
@@ -390,6 +429,8 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
               } else {
                 //this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
+                this.itemInformation.Style = '';
+                this.itemInformation.Size = '';
               }
             //}
             this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
@@ -421,7 +462,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalInformationComponent, {
       // tslint:disable-next-line: object-literal-shorthand
       data: data,
-      minWidth: '90vw', maxWidth: '90vw', minHeight: '40vh', maxHeight: '40vh'
+      minWidth: '70vw', maxWidth: '70vw', minHeight: '50vh', maxHeight: '50vh'
     });
     dialogRef.afterClosed().subscribe(() => {
       dialogRef.addPanelClass('ocultar-modal');

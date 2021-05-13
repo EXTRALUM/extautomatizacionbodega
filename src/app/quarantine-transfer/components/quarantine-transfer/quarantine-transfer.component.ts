@@ -182,6 +182,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     pedidoCompra = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
     ubicacionDestino = (document.getElementById('ubicacionDestino') as HTMLInputElement).value;
     numFactura = (document.getElementById('numFactura') as HTMLInputElement).value;
+    cantFacturado = (document.getElementById('cantFacturada') as HTMLInputElement).valueAsNumber;
 
     if (isCorrect) {
       if (this.cantDiferencia < 0) {
@@ -221,6 +222,12 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     if (isCorrect) {
       if (isNaN(qty)) {
         this.modelInformation('Error', 'Se debe escribir una cantidad a ingresar');
+        isCorrect = false;
+      }
+    }
+    if (isCorrect) {
+      if (cantFacturado === 0) {
+        this.modelInformation('Error', 'No hay cantidades disponibles para recibir');
         isCorrect = false;
       }
     }
