@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: 'https://localhost:5001/api/',
+  apiURL: 'https://api.extralum.co.cr:2001/api/',
   userId: ''
 };
