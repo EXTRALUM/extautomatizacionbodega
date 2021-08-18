@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginModel } from '../model/login.model';
-import { environment } from '../enviroment/enviroment';
+import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { ItemInformation } from '../model/itemInformation.model';
 import { OptionSelect } from '../model/optionselect.model';

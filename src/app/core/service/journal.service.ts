@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { utiles } from 'src/environments/utiles';
-import { environment } from '../enviroment/enviroment';
+import { environment } from '../../../environments/environment';
 import { Journal } from '../model/journal.model';
 import { JournalResponse } from '../model/journalResponse.model';
 import { LocationModel } from '../model/location.model';

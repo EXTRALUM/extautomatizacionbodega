@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoginModel } from '../model/login.model';
-import { environment } from '../enviroment/enviroment';
+import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 /*Constants */
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
