@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   loginModel: LoginModel = new LoginModel();
   submitted = false;
+  errorLogin = '';
   // public http: HttpClient = new HttpClient();
 
   public dialog: MatDialog;
@@ -73,12 +74,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         responseLogin => {
-          if (responseLogin) {
+          if (responseLogin.loginProcess === true) {
             // tslint:disable-next-line: prefer-const
             let loginCache = new LoginModel();
             loginCache.UserId = this.loginModel.UserId;
             utiles.createCacheUser(loginCache);
             this.router.navigate(['home']);
+          } else {
+            this.errorLogin = 'Error, datos de ingreso no son correcto. Favor validar la información';
           }
         }
       );
