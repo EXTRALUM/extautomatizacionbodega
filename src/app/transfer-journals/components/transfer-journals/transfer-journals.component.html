@@ -11,6 +11,9 @@
             {{item.LocationId}} - {{item.LocationName}}
           </option>
         </select> -->
+        <div *ngIf="journalIdGeneral !== ''">
+          <h3> Num. de diario: {{journalIdGeneral}}</h3>
+        </div>
       </div>
       <div class="form-group col-3">
         <button class="btn btn-primary" (click)="OpenModalLocations()">

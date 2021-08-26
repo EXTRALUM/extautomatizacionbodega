@@ -219,7 +219,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalInformationComponent, {
       // tslint:disable-next-line: object-literal-shorthand
       data: data,
-      minWidth: '70vw', maxWidth: '70vw', minHeight: '60vh', maxHeight: '60vh'
+      minWidth: '70vw', maxWidth: '70vw', minHeight: '40vh', maxHeight: '40vh'
     });
 
     dialogRef.afterClosed().subscribe(() => {

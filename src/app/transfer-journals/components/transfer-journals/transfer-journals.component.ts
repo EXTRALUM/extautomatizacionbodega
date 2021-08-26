@@ -45,6 +45,8 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   loteDestino: string;
 
   qty: number;
+
+  journalIdGeneral: string;
   // =====================
   constructor(
     private journalService: JournalService,
@@ -61,6 +63,12 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getLocationAvailable();
+    debugger;
+    let journalCache = utiles.getCacheJournal();
+
+    if (journalCache.JournalId !== null) {
+      this.journalIdGeneral = journalCache.JournalId;
+    }
   }
 
   // tslint:disable-next-line: typedef
@@ -163,6 +171,13 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       }
     }
 
+    if (isCorrect) {
+      if (this.ubicacionDestino === this.ubicacionOrigen) {
+        this.modelInformation('Error', 'La ubicación destino y origen deben ser distintas');
+        isCorrect = false;
+      }
+    }
+
     this.journalList = [];
 
     if (isCorrect)
@@ -213,6 +228,10 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       journalLocal.UserId = loginModel.UserId;
       journalLocal.RegistraDiario = processType;
 
+      // if (journalIdCache !== "") {
+      //   this.journalIdGeneral = journalIdCache;
+      // }
+
       this.journalService.JournalProcess(journalLocal)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
@@ -222,8 +241,23 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
               this.loading = false;
               if (this.journalResponse.MessageType === 'Info') {
                 journalLocal.JournalId = this.journalResponse.JournalId;
+                this.journalIdGeneral = this.journalResponse.JournalId;
                 this.journalList.push(journalLocal);
                 utiles.createCacheJournal(this.journalList);
+
+                (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
+                (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
+
+                (document.getElementById('loteOrigen') as HTMLInputElement).value = '';
+                (document.getElementById('loteDestino') as HTMLInputElement).value = '';
+
+                (document.getElementById('inputCantidad') as HTMLInputElement).valueAsNumber = 0;
+                (document.getElementById('itemId') as HTMLInputElement).value = '';
+
+                this.itemInformation.ItemId = '';
+                this.itemInformation.ItemName = '';
+                this.itemInformation.Color = '';
+                this.itemInformation.Size = '';
               }
               this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
             }
@@ -286,6 +320,19 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
               this.loading = false;
               if (this.journalResponse.MessageType === 'Info') {
                 utiles.clearCacheJournal();
+                (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
+                (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
+
+                (document.getElementById('loteOrigen') as HTMLInputElement).value = '';
+                (document.getElementById('loteDestino') as HTMLInputElement).value = '';
+
+                (document.getElementById('inputCantidad') as HTMLInputElement).valueAsNumber = 0;
+                (document.getElementById('itemId') as HTMLInputElement).value = '';
+
+                this.itemInformation.ItemId = '';
+                this.itemInformation.ItemName = '';
+                this.itemInformation.Color = '';
+                this.itemInformation.Size = '';
               }
               this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
             }
@@ -316,7 +363,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalInformationComponent, {
       // tslint:disable-next-line: object-literal-shorthand
       data: data,
-      minWidth: '90vw', maxWidth: '90vw', minHeight: '60vh', maxHeight: '60vh'
+      minWidth: '90vw', maxWidth: '90vw', minHeight: '40vh', maxHeight: '40vh'
     });
     dialogRef.afterClosed().subscribe(() => {
       dialogRef.addPanelClass('ocultar-modal');
