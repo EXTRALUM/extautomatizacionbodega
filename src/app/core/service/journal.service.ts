@@ -11,6 +11,7 @@ import { Quarantine } from '../model/quarantine.model';
 import { QuarantineHistory } from '../model/quarantineHistory.model';
 import { QuarantineResponse } from '../model/quarantineResponse.model';
 import { QuarantineParm } from '../model/qurantineParm.model';
+import { ValidationModel } from '../model/validation.model';
 import { CommonService } from './common.service';
 
 /*Constants */
@@ -62,6 +63,20 @@ export class JournalService {
     const url = environment.apiURL + 'QuarantineHistory';
     let listLocal;
     return this.http.post<QuarantineHistory[]>(url, quarantineParm, httpOptions)
+    .pipe(map(response => {
+      if (response) {
+        listLocal = response;
+      } else {
+        listLocal = null;
+      }
+      return listLocal;
+    }));
+  }
+
+  ValidationValues(validationParm: ValidationModel) {
+    const url = environment.apiURL + 'ValidateValues';
+    let listLocal;
+    return this.http.post<ValidationModel>(url, validationParm, httpOptions)
     .pipe(map(response => {
       if (response) {
         listLocal = response;
