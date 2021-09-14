@@ -11,7 +11,9 @@
             {{item.LocationId}} - {{item.LocationName}}
           </option>
         </select> -->
-        <h3>Diario: {{journalIdGeneral}}</h3>
+        <div *ngIf="journalIdGeneral !== ''">
+          <h3> Num. de diario: {{journalIdGeneral}}</h3>
+        </div>
       </div>
       <div class="form-group col-3">
         <button class="btn btn-primary" (click)="OpenModalLocations()">
@@ -42,7 +44,7 @@
     <div class="form-row">
       <div class="form-group col-6">
         <label for="inputUbicacionOrigen">Ubicación Origen*</label>
-        <input type="text" class="form-control" id="ubicacionOrigen" placeholder="Ubicación Origen">
+        <input type="text" class="form-control" id="ubicacionOrigen" placeholder="Ubicación Origen" (change)="ValidationProcess(2)">
       </div>
       <div class="form-group col-6">
         <label for="inputLoteOrigen">Lote Origen</label>
@@ -52,7 +54,7 @@
     <div class="form-row">
       <div class="form-group col-6">
         <label for="inputUbicacionDestino">Ubicación Destino*</label>
-        <input type="text" class="form-control" id="ubicacionDestino" placeholder="Ubicación Destino">
+        <input type="text" class="form-control" id="ubicacionDestino" placeholder="Ubicación Destino" (change)="ValidationProcess(3)">
       </div>
       <div class="form-group col-6">
         <label for="inputLoteDestino">Lote Destino</label>

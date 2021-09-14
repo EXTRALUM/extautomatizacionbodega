@@ -15,6 +15,7 @@ import { ModalInformationComponent } from 'src/app/core/modal/modal-information/
 import { ModalLocationComponent } from 'src/app/core/modal/modal-location/modal-location.component';
 import { Location } from '@angular/common';
 import { ModalConfirmComponent } from 'src/app/core/modal/modal-confirm/modal-confirm.component';
+import { ValidationModel } from 'src/app/core/model/validation.model';
 
 @Component({
   selector: 'app-transfer-journals',
@@ -46,7 +47,13 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   loteDestino: string;
 
   qty: number;
+
+  journalIdGeneral: string;
   // =====================
+
+  vValidation: ValidationModel;
+  vValidationResponse: ValidationModel;
+
   constructor(
     private journalService: JournalService,
     private generalService: GeneralOptionsService,
@@ -88,9 +95,14 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
         this.journalList.push(journalLocalIM);
       });
+    debugger;
+    let journalCache = utiles.getCacheJournal();
+
+    if (journalCache.JournalId !== null) {
+      this.journalIdGeneral = journalCache.JournalId;
     }
   }
-
+  }
   // tslint:disable-next-line: typedef
   getLocationAvailable() {
     this.journalService.LocationAvailable()
@@ -106,18 +118,37 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   }
   // tslint:disable-next-line: typedef
   getItemInformation() {
-    // tslint:disable-next-line: prefer-const
+
     let itemInfo = new ItemInformation();
     itemInfo.ItemId = (document.getElementById('itemId') as HTMLInputElement).value;
-    this.generalService.itemInformation(itemInfo)
+    this.vValidation = new ValidationModel();
+
+    this.vValidation.ValidationType = 1;
+    this.vValidation.ValidationValue = itemInfo.ItemId;
+    this.vValidation.ValidationReference = '';
+
+    this.journalService.ValidationValues(this.vValidation)
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(
-        responseItem => {
-          if (responseItem) {
-            this.itemInformation = responseItem;
+      response => {
+        if (response) {
+          this.vValidationResponse = response;
+
+          if (this.vValidationResponse.ValidationResponse !== 'Correcto') {
+            this.modelInformation('Error', this.vValidationResponse.ValidationResponse);
+          } else {
+            this.generalService.itemInformation(itemInfo)
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(
+                responseItem => {
+                  if (responseItem) {
+                    this.itemInformation = responseItem;
+                  }
+                }
+              );
           }
         }
-      );
+      });
   }
 
   // tslint:disable-next-line: typedef
@@ -196,6 +227,13 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       }
     }
 
+    if (isCorrect) {
+      if (this.ubicacionDestino === this.ubicacionOrigen) {
+        this.modelInformation('Error', 'La ubicación destino y origen deben ser distintas');
+        isCorrect = false;
+      }
+    }
+
     this.journalList = [];
 
     if (isCorrect)
@@ -246,6 +284,10 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       journalLocal.UserId = loginModel.UserId;
       journalLocal.RegistraDiario = processType;
 
+      // if (journalIdCache !== "") {
+      //   this.journalIdGeneral = journalIdCache;
+      // }
+
       this.journalService.JournalProcess(journalLocal)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
@@ -255,19 +297,22 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
               this.loading = false;
               if (this.journalResponse.MessageType === 'Info') {
                 journalLocal.JournalId = this.journalResponse.JournalId;
+                this.journalIdGeneral = this.journalResponse.JournalId;
                 this.journalList.push(journalLocal);
                 utiles.createCacheJournal(this.journalList);
-                this.journalIdGeneral = this.journalResponse.JournalId;
 
                 (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
                 (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
-                (document.getElementById('itemId') as HTMLInputElement).value = '';
+
+                (document.getElementById('loteOrigen') as HTMLInputElement).value = '';
+                (document.getElementById('loteDestino') as HTMLInputElement).value = '';
+
                 (document.getElementById('inputCantidad') as HTMLInputElement).valueAsNumber = 0;
+                (document.getElementById('itemId') as HTMLInputElement).value = '';
 
                 this.itemInformation.ItemId = '';
                 this.itemInformation.ItemName = '';
                 this.itemInformation.Color = '';
-                this.itemInformation.Style = '';
                 this.itemInformation.Size = '';
               }
               this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
@@ -331,19 +376,19 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
               this.loading = false;
               if (this.journalResponse.MessageType === 'Info') {
                 utiles.clearCacheJournal();
-                this.journalIdGeneral = '';
-
                 (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
                 (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
-                (document.getElementById('itemId') as HTMLInputElement).value = '';
+
+                (document.getElementById('loteOrigen') as HTMLInputElement).value = '';
+                (document.getElementById('loteDestino') as HTMLInputElement).value = '';
+
                 (document.getElementById('inputCantidad') as HTMLInputElement).valueAsNumber = 0;
+                (document.getElementById('itemId') as HTMLInputElement).value = '';
 
                 this.itemInformation.ItemId = '';
                 this.itemInformation.ItemName = '';
                 this.itemInformation.Color = '';
-                this.itemInformation.Style = '';
                 this.itemInformation.Size = '';
-
               }
               this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
             }
@@ -374,7 +419,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalInformationComponent, {
       // tslint:disable-next-line: object-literal-shorthand
       data: data,
-      minWidth: '70vw', maxWidth: '70vw', minHeight: '50vh', maxHeight: '50vh'
+      minWidth: '90vw', maxWidth: '90vw', minHeight: '40vh', maxHeight: '40vh'
     });
     dialogRef.afterClosed().subscribe(() => {
       dialogRef.addPanelClass('ocultar-modal');
@@ -401,5 +446,56 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: typedef
   goBackAction() {
     this.location.back();
+  }
+
+  ValidationProcess (validationType: number) {
+
+    this.vValidation = new ValidationModel();
+
+    if (validationType === 1) {
+      let vItemId = (document.getElementById('itemId') as HTMLInputElement).value;
+      this.vValidation.ValidationType = validationType;
+      this.vValidation.ValidationValue = vItemId;
+      this.vValidation.ValidationReference = '';
+
+      this.journalService.ValidationValues(this.vValidation)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        response => {
+          if (response) {
+            this.vValidationResponse = response;
+
+            if (this.vValidationResponse.ValidationResponse !== 'Correcto') {
+              this.modelInformation('Error', this.vValidationResponse.ValidationResponse);
+            }
+          }
+        });
+    } else if (validationType === 2 || validationType === 3) {
+
+      let locationOrigen = new LocationModel();
+      let locationDestino = new LocationModel();
+
+      locationOrigen = utiles.getCacheLocationOrigen();
+      locationDestino = utiles.getCacheLocationDestino();
+
+      let vUbicacion = validationType === 2 ? (document.getElementById('ubicacionOrigen') as HTMLInputElement).value : (document.getElementById('ubicacionDestino') as HTMLInputElement).value;
+
+      this.vValidation.ValidationType = 2;
+      this.vValidation.ValidationValue = vUbicacion;
+      this.vValidation.ValidationReference =  validationType === 2 ? locationOrigen.LocationId : locationDestino.LocationId;
+
+      this.journalService.ValidationValues(this.vValidation)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        response => {
+          if (response) {
+            this.vValidationResponse = response;
+
+            if (this.vValidationResponse.ValidationResponse !== 'Correcto') {
+              this.modelInformation('Error', this.vValidationResponse.ValidationResponse);
+            }
+          }
+        });
+    }
   }
 }

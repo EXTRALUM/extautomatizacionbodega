@@ -17,6 +17,9 @@ import { JournalService } from 'src/app/core/service/journal.service';
 import { utiles } from 'src/environments/utiles';
 import { LocationModel } from '../../../core/model/location.model';
 import { Location } from '@angular/common';
+import { ModalReceiveComponent } from 'src/app/core/modal/modal-receive/modal-receive.component';
+import { element } from 'protractor';
+import { LinesToReceive } from 'src/app/core/model/linesToReceive.model';
 
 @Component({
   selector: 'app-quarantine-transfer',
@@ -35,6 +38,11 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
   qtyQuarantine: QtyQuarantine;
   quarantineResponse: QuarantineResponse;
   loading: boolean;
+
+  PurchId: string;
+  InvoiceId: string;
+
+  line: LinesToReceive = new LinesToReceive();
 
   constructor(
     private generalService: GeneralOptionsService,
@@ -99,8 +107,13 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
           responseItem => {
             if (responseItem) {
               this.qtyQuarantine = responseItem;
-              this.cantFacturada = this.qtyQuarantine.QtyFacturada;
               this.cantRecibida = this.qtyQuarantine.QtyRecibida;
+
+              if (this.line !== null) {
+                this.cantFacturada = this.line.CantidadRecibir;
+              } else {
+                this.cantFacturada = this.qtyQuarantine.QtyFacturada;
+              }
             }
           }
         );
@@ -113,20 +126,18 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     let isCorrect = true;
     let login = new LoginModel();
     // tslint:disable-next-line: one-variable-per-declaration
-    let qty, numLinea, pedidoCompra, ubicacionDestino, cantFacturado;
+    let qty, numLinea, pedidoCompra, ubicacionDestino, numFactura;
 
-    locationOrigen = utiles.getCacheLocationQuarantine();
+    //locationOrigen = utiles.getCacheLocationQuarantine();
     qty = (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber;
     numLinea = (document.getElementById('numLinea') as HTMLInputElement).valueAsNumber;
     pedidoCompra = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
-    locationOrigen = utiles.getCacheLocationQuarantine();
+    //locationOrigen = utiles.getCacheLocationQuarantine();
     ubicacionDestino = (document.getElementById('ubicacionDestino') as HTMLInputElement).value;
     cantFacturado = (document.getElementById('cantFacturada') as HTMLInputElement).valueAsNumber;
-
-    if (locationOrigen === undefined || locationOrigen === null) {
-      this.modelInformation('Error', 'No se ha seleccionado una bodega de cuarentena');
-      isCorrect = false;
-    }
+    numFactura = (document.getElementById('numFactura') as HTMLInputElement).value;
+    //   this.modelInformation('Error', 'No se ha seleccionado una bodega de cuarentena');
+    // }
 
     if (isCorrect) {
       if (pedidoCompra === '') {
@@ -180,8 +191,9 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
       quarantine.NumLinea = numLinea;
       quarantine.PedidoCompra = pedidoCompra;
       quarantine.UbicacionDestino = ubicacionDestino;
-      quarantine.Bodega = locationOrigen.LocationId;
+      quarantine.Bodega = '';
       quarantine.UserId = login.UserId;
+      quarantine.RefRecIdWMS = this.line.RefRecIdWMS;
 
       this.loading = true;
       this.journalService.QuarantineProcess(quarantine)
@@ -227,7 +239,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ModalInformationComponent, {
       // tslint:disable-next-line: object-literal-shorthand
       data: data,
-      minWidth: '70vw', maxWidth: '70vw', minHeight: '60vh', maxHeight: '60vh'
+      minWidth: '70vw', maxWidth: '70vw', minHeight: '40vh', maxHeight: '40vh'
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -276,6 +288,40 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: object-literal-shorthand
       data: data,
       minWidth: '90vw', maxWidth: '90vw', minHeight: '80vh', maxHeight: '80vh'
+    });
+  }
+
+  OpenModalLinesToReceive() {
+
+    let purchId = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
+    let invoiceId = (document.getElementById('numFactura') as HTMLInputElement).value;
+
+    const data = {
+      purchId: purchId,
+      invoiceId: invoiceId
+    };
+
+    const dialogRef = this.dialog.open(ModalReceiveComponent, {
+      disableClose: true,
+      // tslint:disable-next-line: object-literal-shorthand
+      data: data,
+      minWidth: '90vw', maxWidth: '90vw', minHeight: '80vh', maxHeight: '80vh'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.line = result.data;
+      dialogRef.addPanelClass('ocultar-modal');
+      setTimeout(() => {
+        this.dialog.closeAll();
+      }, 300);
+
+      if (this.line !== null) {
+        //locationOrigen = utiles.getCacheLocationQuarantine();
+        //qty = (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber;
+        (document.getElementById('numLinea') as HTMLInputElement).valueAsNumber = this.line.NumLinea;
+        this.getItemInformation();
+      }
+
     });
   }
 
