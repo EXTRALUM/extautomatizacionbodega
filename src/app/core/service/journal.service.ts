@@ -5,6 +5,7 @@ import { utiles } from 'src/environments/utiles';
 import { environment } from '../../../environments/environment';
 import { Journal } from '../model/journal.model';
 import { JournalResponse } from '../model/journalResponse.model';
+import { LinesParams } from '../model/linesParams.model';
 import { LocationModel } from '../model/location.model';
 import { LoginModel } from '../model/login.model';
 import { Quarantine } from '../model/quarantine.model';
@@ -77,6 +78,21 @@ export class JournalService {
     const url = environment.apiURL + 'ValidateValues';
     let listLocal;
     return this.http.post<ValidationModel>(url, validationParm, httpOptions)
+    .pipe(map(response => {
+      if (response) {
+        listLocal = response;
+      } else {
+        listLocal = null;
+      }
+      return listLocal;
+    }));
+  }
+
+  LinesToReceive(linesParams: LinesParams) {
+    debugger;
+    const url = environment.apiURL + 'GetLinesToReceive';
+    let listLocal;
+    return this.http.post<any>(url, linesParams, httpOptions)
     .pipe(map(response => {
       if (response) {
         listLocal = response;

@@ -7,6 +7,7 @@ export class Quarantine {
   PedidoCompra: string;
   UbicacionDestino: string;
   UserId: string;
+  RefRecIdWMS: number;
 
   constructor() {
     this.Bodega = '';
@@ -16,5 +17,6 @@ export class Quarantine {
     this.PedidoCompra = '';
     this.UbicacionDestino = '';
     this.UserId = '';
+    this.RefRecIdWMS = 0;
   }
 }

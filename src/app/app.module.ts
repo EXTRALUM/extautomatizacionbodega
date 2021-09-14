@@ -25,6 +25,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalConfirmComponent } from './core/modal/modal-confirm/modal-confirm.component';
+import { ModalReceiveComponent } from './core/modal/modal-receive/modal-receive.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import { ModalConfirmComponent } from './core/modal/modal-confirm/modal-confirm.
     FooterComponent,
     ModalInformationComponent,
     ModalLocationComponent,
-    ModalConfirmComponent
+    ModalConfirmComponent,
+    ModalReceiveComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,10 @@ import { ModalConfirmComponent } from './core/modal/modal-confirm/modal-confirm.
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule
   ],
   providers: [DatePipe,
     {

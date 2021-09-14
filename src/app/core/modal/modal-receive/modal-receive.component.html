@@ -1,0 +1,46 @@
+<div class="card-wrapper">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Líneas a seleccionar para entrega
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngFor="let line of LinesToReceive" (click)="saveLineInformationToReceive(line)">
+      <div class="row" >
+        <div class="row">
+          <div class="col-12">
+            Línea: {{line.NumLinea}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            Ped. de Compra: {{line.PedidoCompra}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            Artículo: {{line.ItemId}} - {{line.ItemName}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            Color: {{line.Color}}
+          </div>
+          <div class="col-6">
+            Estilo: {{line.Style}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            Cant. a recibir: {{line.CantidadRecibir}}
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="closeDialog(null)">Cancelar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
