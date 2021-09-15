@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgxLoadingModule } from 'ngx-loading';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     CommonModule,
     MatIconModule,
+    MatAutocompleteModule,
     NgxLoadingModule.forRoot({})
   ]
 })
