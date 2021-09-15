@@ -7,6 +7,7 @@ import { ItemInformation } from '../model/itemInformation.model';
 import { OptionSelect } from '../model/optionselect.model';
 import { ItemQuarantine } from '../model/itemQuarantine.model';
 import { QtyQuarantine } from '../model/qtyInvoice.model';
+import { SuggestionModel } from '../model/suggestion.model';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
@@ -52,6 +53,14 @@ export class GeneralOptionsService {
   qtyQuarantine(itemInvoice: ItemQuarantine) {
     const url = environment.apiURL + 'QtyFactura';
     return this.http.post<QtyQuarantine>(url, itemInvoice, httpOptions)
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+
+  DocumentSuggestion(suggestion: SuggestionModel) {
+    const url = environment.apiURL + 'GetDocumentSuggestion';
+    return this.http.post<any>(url, suggestion, httpOptions)
       .pipe(map(response => {
         return response;
       }));

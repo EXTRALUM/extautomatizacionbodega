@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { ModalInformationComponent } from 'src/app/core/modal/modal-information/modal-information.component';
 import { ModalLocationComponent } from 'src/app/core/modal/modal-location/modal-location.component';
 import { ItemInformation } from 'src/app/core/model/itemInformation.model';
@@ -20,6 +20,8 @@ import { Location } from '@angular/common';
 import { ModalReceiveComponent } from 'src/app/core/modal/modal-receive/modal-receive.component';
 import { element } from 'protractor';
 import { LinesToReceive } from 'src/app/core/model/linesToReceive.model';
+import { SuggestionModel } from 'src/app/core/model/suggestion.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-quarantine-transfer',
@@ -43,7 +45,13 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
   InvoiceId: string;
 
   line: LinesToReceive = new LinesToReceive();
-
+  suggestion: SuggestionModel = new SuggestionModel();
+  filteredOptions: SuggestionModel[];
+  filterListString: string[] = [];
+  filterListString2: string[] = []
+  filteredOptionsObs: Observable<string[]>;
+  purchControl = new FormControl();
+  invoiceControl = new FormControl();
   constructor(
     private generalService: GeneralOptionsService,
     private journalService: JournalService,
@@ -62,8 +70,28 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     this.cantFacturada = 0;
     this.cantDiferencia = 0;
 
+    // this.filteredOptionsObs = this.purchControl.valueChanges.pipe(
+    //   startWith(''),
+    //   debounceTime(4000),
+    //   distinctUntilChanged(),
+    //   map(value => this._filter(value))
+    // );
+
+    // this.filteredOptionsObs = this.invoiceControl.valueChanges.pipe(
+    //   startWith(''),
+    //   debounceTime(4000),
+    //   distinctUntilChanged(),
+    //   map(value => this._filter(value))
+    // );
+
     // this.getLocationAvailable();
   }
+
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.filterListString.filter(option => option.toLowerCase().includes(filterValue));
+  // }
 
   // tslint:disable-next-line: typedef
   getItemInformation() {
@@ -109,7 +137,9 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
               this.qtyQuarantine = responseItem;
               this.cantRecibida = this.qtyQuarantine.QtyRecibida;
 
-              if (this.line !== null) {
+              console.log(this.line.CantidadRecibir);
+
+              if (this.line.CantidadRecibir !== 0) {
                 this.cantFacturada = this.line.CantidadRecibir;
               } else {
                 this.cantFacturada = this.qtyQuarantine.QtyFacturada;
@@ -323,5 +353,48 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: typedef
   goBackAction() {
     this.location.back();
+  }
+
+  DocumentSuggestion() {
+    debugger;
+    let puchId, invoiceId;
+    this.suggestion = new SuggestionModel();
+    this.filterListString = [];
+    this.filterListString2 = [];
+
+    console.log("Llamado modify");
+
+    puchId = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
+    invoiceId = (document.getElementById('numFactura') as HTMLInputElement).value;
+
+    console.log(puchId);
+    console.log(invoiceId);
+
+    if (puchId !== '' && invoiceId === '') {
+      this.suggestion.DocumentoToCheck = puchId;
+      this.suggestion.DocumentoType = 'Compra'
+
+    } else if (puchId === '' && invoiceId !== '') {
+      this.suggestion.DocumentoToCheck = invoiceId;
+      this.suggestion.DocumentoType = 'Factura'
+    }
+
+    this.generalService.DocumentSuggestion(this.suggestion)
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(
+      responseList => {
+          if (responseList) {
+            this.filteredOptions = responseList;
+
+            this.filteredOptions.forEach(element => {
+              if (element.DocumentoResponse.startsWith('COM')) {
+                this.filterListString.push(element.DocumentoResponse)
+              } else {
+                this.filterListString2.push(element.DocumentoResponse)
+              }
+            });
+          }
+        }
+      );
   }
 }
