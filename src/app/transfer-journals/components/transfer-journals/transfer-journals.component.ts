@@ -67,9 +67,32 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getLocationAvailable();
-    debugger;
+
     let journalCache = utiles.getCacheJournal();
+
+    if (journalCache) {
+      journalCache.forEach(element => {
+        // tslint:disable-next-line: prefer-const
+        let journalLocalIM = new Journal();
+        journalLocalIM.ItemId = element.ItemId;
+        journalLocalIM.BodegaDestino = element.BodegaDestino;
+        journalLocalIM.BodegaOrigen = element.BodegaOrigen;
+        journalLocalIM.Cantidad = element.Cantidad;
+        journalLocalIM.Color = element.Color;
+        journalLocalIM.ItemId = element.ItemId;
+        journalLocalIM.JournalId = element.JournalId;
+        journalLocalIM.LoteDestino = element.LoteDestino;
+        journalLocalIM.LoteOrigen = element.LoteOrigen;
+        journalLocalIM.Size = element.Size;
+        journalLocalIM.Style = element.Style;
+        journalLocalIM.UbicacionDestino = element.UbicacionDestino;
+        journalLocalIM.UbicacionOrigen = element.UbicacionOrigen;
+        journalLocalIM.UserId = element.UserId;
+
+        this.journalIdGeneral = element.JournalId;
+
+        this.journalList.push(journalLocalIM);
+      });
 
     if (journalCache.JournalId !== null) {
       this.journalIdGeneral = journalCache.JournalId;

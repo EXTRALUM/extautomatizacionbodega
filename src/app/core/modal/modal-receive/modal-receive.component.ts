@@ -1,10 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { stringify } from 'querystring';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { utiles } from 'src/environments/utiles';
 import { DocumentLinesModel } from '../../model/documentLines.model';
 import { LinesParams } from '../../model/linesParams.model';
 import { LinesToReceive } from '../../model/linesToReceive.model';
+import { LoginModel } from '../../model/login.model';
 import { JournalService } from '../../service/journal.service';
 
 @Component({
@@ -19,6 +22,7 @@ export class ModalReceiveComponent implements OnInit {
   invoiceId: string;
   linesParams: LinesParams = new LinesParams();
   LinesToReceive: LinesToReceive[];
+  userLogin: LoginModel = new LoginModel();
 
   constructor(@Inject(MAT_DIALOG_DATA)public dataMessage: DocumentLinesModel, private journalService: JournalService, public dialogRef: MatDialogRef<ModalReceiveComponent>) {
     if (this.dataMessage !== undefined) {
@@ -27,6 +31,8 @@ export class ModalReceiveComponent implements OnInit {
 
       this.linesParams.PurchId = this.purchId;
       this.linesParams.InvoiceId = this.invoiceId;
+      this.userLogin = utiles.getCacheLogin();
+      this.linesParams.UserId = this.userLogin.UserId;
     }
   }
 
