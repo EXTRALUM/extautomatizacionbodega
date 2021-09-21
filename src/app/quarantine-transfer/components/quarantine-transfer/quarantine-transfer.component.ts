@@ -136,7 +136,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
             if (responseItem) {
               this.qtyQuarantine = responseItem;
               this.cantRecibida = this.qtyQuarantine.QtyRecibida;
-
+              (document.getElementById('unidadMedida') as HTMLInputElement).value = this.qtyQuarantine.UnidadMedida
               console.log(this.line.CantidadRecibir);
 
               if (this.line.CantidadRecibir !== 0) {
@@ -156,7 +156,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     let isCorrect = true;
     let login = new LoginModel();
     // tslint:disable-next-line: one-variable-per-declaration
-    let qty, numLinea, pedidoCompra, ubicacionDestino, numFactura;
+    let qty, numLinea, pedidoCompra, ubicacionDestino, numFactura, cantFacturado;
 
     //locationOrigen = utiles.getCacheLocationQuarantine();
     qty = (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber;
@@ -234,6 +234,8 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
               this.loading = false;
               this.quarantineResponse = responseQuarantine;
               this.modelInformation(this.quarantineResponse.ResponseType, this.quarantineResponse.ResponseMessage);
+              (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber = 0;
+              this.getQtyInformation();
             }
           }
         );

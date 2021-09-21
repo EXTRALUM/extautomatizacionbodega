@@ -34,7 +34,6 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   journalList: Journal[];
   loading: boolean;
   processRegister: number;
-  journalIdGeneral: string;
 
   // ======================
   bodegaOrigen: string;
@@ -95,8 +94,6 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
         this.journalList.push(journalLocalIM);
       });
-    debugger;
-    let journalCache = utiles.getCacheJournal();
 
     if (journalCache.JournalId !== null) {
       this.journalIdGeneral = journalCache.JournalId;
