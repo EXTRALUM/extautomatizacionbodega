@@ -360,24 +360,24 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
   DocumentSuggestion() {
     debugger;
     let puchId, invoiceId;
+    let userModel = new LoginModel();
     this.suggestion = new SuggestionModel();
     this.filterListString = [];
     this.filterListString2 = [];
 
-    console.log("Llamado modify");
-
     puchId = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
     invoiceId = (document.getElementById('numFactura') as HTMLInputElement).value;
 
-    console.log(puchId);
-    console.log(invoiceId);
+    userModel = utiles.getCacheLogin();
 
     if (puchId !== '' && invoiceId === '') {
       this.suggestion.DocumentoToCheck = puchId;
+      this.suggestion.UserId = userModel.UserId;
       this.suggestion.DocumentoType = 'Compra'
 
     } else if (puchId === '' && invoiceId !== '') {
       this.suggestion.DocumentoToCheck = invoiceId;
+      this.suggestion.UserId = userModel.UserId;
       this.suggestion.DocumentoType = 'Factura'
     }
 
