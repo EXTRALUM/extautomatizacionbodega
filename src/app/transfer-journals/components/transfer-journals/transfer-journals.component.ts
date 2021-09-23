@@ -98,6 +98,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       this.journalIdGeneral = journalCache.JournalId;
     }
   }
+}
 
   // tslint:disable-next-line: typedef
   getLocationAvailable() {
