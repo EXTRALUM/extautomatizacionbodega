@@ -43,6 +43,7 @@ export class JournalService {
     const url = environment.apiURL + 'JournalProcess';
     return this.http.post<JournalResponse>(url, journal, httpOptions)
     .pipe(map(response => {
+      debugger;
       this.common._setLoading(false);
       return response;
     }));

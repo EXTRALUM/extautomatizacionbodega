@@ -47,7 +47,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
   qty: number;
 
-  journalIdGeneral: string;
+  journalIdGeneral: string = '';
   // =====================
 
   vValidation: ValidationModel;
@@ -68,37 +68,13 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    let journalCache = utiles.getCacheJournal();
+    let journalIdCache = utiles.getCacheJournalId();
+    console.log(journalIdCache);
 
-    if (journalCache) {
-      journalCache.forEach(element => {
-        // tslint:disable-next-line: prefer-const
-        let journalLocalIM = new Journal();
-        journalLocalIM.ItemId = element.ItemId;
-        journalLocalIM.BodegaDestino = element.BodegaDestino;
-        journalLocalIM.BodegaOrigen = element.BodegaOrigen;
-        journalLocalIM.Cantidad = element.Cantidad;
-        journalLocalIM.Color = element.Color;
-        journalLocalIM.ItemId = element.ItemId;
-        journalLocalIM.JournalId = element.JournalId;
-        journalLocalIM.LoteDestino = element.LoteDestino;
-        journalLocalIM.LoteOrigen = element.LoteOrigen;
-        journalLocalIM.Size = element.Size;
-        journalLocalIM.Style = element.Style;
-        journalLocalIM.UbicacionDestino = element.UbicacionDestino;
-        journalLocalIM.UbicacionOrigen = element.UbicacionOrigen;
-        journalLocalIM.UserId = element.UserId;
-
-        this.journalIdGeneral = element.JournalId;
-
-        this.journalList.push(journalLocalIM);
-      });
-
-    if (journalCache.JournalId !== null) {
-      this.journalIdGeneral = journalCache.JournalId;
+    if (journalIdCache !== null) {
+      this.journalIdGeneral = journalIdCache;
     }
   }
-}
 
   // tslint:disable-next-line: typedef
   getLocationAvailable() {
@@ -228,6 +204,9 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
 
     this.journalList = [];
 
+    if (this.journalIdGeneral !== "")
+      journalIdCache = this.journalIdGeneral;
+
     if (isCorrect)
     {
       this.loading = true;
@@ -276,14 +255,11 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       journalLocal.UserId = loginModel.UserId;
       journalLocal.RegistraDiario = processType;
 
-      // if (journalIdCache !== "") {
-      //   this.journalIdGeneral = journalIdCache;
-      // }
-
       this.journalService.JournalProcess(journalLocal)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
           responseJournal => {
+            debugger;
             if (responseJournal) {
               this.journalResponse = responseJournal;
               this.loading = false;
@@ -291,7 +267,9 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
                 journalLocal.JournalId = this.journalResponse.JournalId;
                 this.journalIdGeneral = this.journalResponse.JournalId;
                 this.journalList.push(journalLocal);
+
                 utiles.createCacheJournal(this.journalList);
+                utiles.createCacheJournalId(this.journalIdGeneral);
 
                 (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
                 (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
@@ -306,6 +284,11 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
                 this.itemInformation.ItemName = '';
                 this.itemInformation.Color = '';
                 this.itemInformation.Size = '';
+
+                if (this.journalResponse.Message === 'Se ha registrado el diario de manera correcta') {
+                  utiles.clearCacheJournalId();
+                  this.journalIdGeneral = '';
+                }
               }
               this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
             }
@@ -367,7 +350,6 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
               this.journalResponse = responseJournal;
               this.loading = false;
               if (this.journalResponse.MessageType === 'Info') {
-                utiles.clearCacheJournal();
                 (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
                 (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
 
@@ -381,8 +363,16 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
                 this.itemInformation.ItemName = '';
                 this.itemInformation.Color = '';
                 this.itemInformation.Size = '';
+
+                if (this.journalResponse.Message === 'Se ha registrado el diario de manera correcta') {
+                  utiles.clearCacheJournal();
+                  utiles.clearCacheJournalId();
+                  this.journalIdGeneral = '';
+                }
+                this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
+              } else {
+                this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
               }
-              this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
             }
           }
         );

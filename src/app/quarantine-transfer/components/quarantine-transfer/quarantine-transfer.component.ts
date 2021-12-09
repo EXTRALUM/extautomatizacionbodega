@@ -22,6 +22,7 @@ import { element } from 'protractor';
 import { LinesToReceive } from 'src/app/core/model/linesToReceive.model';
 import { SuggestionModel } from 'src/app/core/model/suggestion.model';
 import { FormControl } from '@angular/forms';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-quarantine-transfer',
@@ -95,10 +96,12 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line: typedef
   getItemInformation() {
-    // tslint:disable-next-line: prefer-const
+    debugger;
     let itemInfo = new ItemQuarantine();
     itemInfo.PedidoCompra = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
     itemInfo.NumLinea = (document.getElementById('numLinea') as HTMLInputElement).valueAsNumber;
+
+    debugger;
 
     if (itemInfo.PedidoCompra !== '' && itemInfo.NumLinea > 0) {
       this.generalService.itemQuarantine(itemInfo)
@@ -107,12 +110,27 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
           responseItem => {
             if (responseItem) {
               this.itemInformation = responseItem;
+
+              if (this.itemInformation.ItemName === "Error") {
+                this.itemInformation.ItemName = "";
+                const data = {
+                  // tslint:disable-next-line: object-literal-shorthand
+                  status: 'success',
+                  labelTitile: 'Información',
+                  textDescription: 'Error al tratar de cargar información de la línea. Validar que sea un número de línea válido'
+                };
+                const dialogRef = this.dialog.open(ModalInformationComponent, {
+                  // tslint:disable-next-line: object-literal-shorthand
+                  data: data,
+                  minWidth: '70vw', maxWidth: '70vw', minHeight: '40vh', maxHeight: '40vh'
+                });
+              } else {
+              this.getQtyInformation();
+              }
             }
           }
         );
     }
-
-    this.getQtyInformation();
   }
 
   // tslint:disable-next-line: typedef
@@ -145,6 +163,8 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
                 this.cantFacturada = this.qtyQuarantine.QtyFacturada;
               }
             }
+
+            this.cantDiferencia = 0;
           }
         );
     }
@@ -158,18 +178,25 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
     // tslint:disable-next-line: one-variable-per-declaration
     let qty, numLinea, pedidoCompra, ubicacionDestino, numFactura, cantFacturado;
 
-    //locationOrigen = utiles.getCacheLocationQuarantine();
     qty = (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber;
     numLinea = (document.getElementById('numLinea') as HTMLInputElement).valueAsNumber;
     pedidoCompra = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
-    //locationOrigen = utiles.getCacheLocationQuarantine();
     ubicacionDestino = (document.getElementById('ubicacionDestino') as HTMLInputElement).value;
     numFactura = (document.getElementById('numFactura') as HTMLInputElement).value;
 
-    // if (locationOrigen === undefined || locationOrigen === null) {
-    //   this.modelInformation('Error', 'No se ha seleccionado una bodega de cuarentena');
-    //   isCorrect = false;
-    // }
+    if (isCorrect) {
+      if (this.cantDiferencia < 0) {
+        this.modelInformation('Error', 'La cantidad a recibir no puede ser mayor a la facturada');
+        isCorrect = false;
+      }
+    }
+
+    if(isCorrect) {
+      if (this.itemInformation.ItemName === '') {
+        this.modelInformation('Error', 'No hay información del artículo o de la línea del pedido de compra');
+        isCorrect = false;
+      }
+    }
 
     if (isCorrect) {
       if (pedidoCompra === '') {
@@ -231,6 +258,7 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
               this.quarantineResponse = responseQuarantine;
               this.modelInformation(this.quarantineResponse.ResponseType, this.quarantineResponse.ResponseMessage);
               (document.getElementById('cantRecibir') as HTMLInputElement).valueAsNumber = 0;
+              (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
               this.getQtyInformation();
             }
           }
@@ -327,6 +355,11 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
       purchId: purchId,
       invoiceId: invoiceId
     };
+
+    this.itemInformation.ItemId = '';
+    this.itemInformation.ItemName = '';
+    this.itemInformation.Color = '';
+    (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
 
     const dialogRef = this.dialog.open(ModalReceiveComponent, {
       disableClose: true,

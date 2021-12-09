@@ -17,7 +17,7 @@ export class utiles {
   // tslint:disable-next-line: typedef
   static clearCacheUser() {
     localStorage.removeItem('login');
-    localStorage.removeItem('journalLine');
+    //localStorage.removeItem('journalLine');
     localStorage.removeItem('quarantineLine');
     localStorage.removeItem('locationOrigen');
     localStorage.removeItem('locationDestino');
@@ -42,6 +42,10 @@ export class utiles {
   // tslint:disable-next-line: typedef
   static clearCacheLocationQuarantine() {
     localStorage.removeItem('locationQuarantine');
+  }
+
+  static clearCacheJournalId() {
+    localStorage.removeItem('journalId');
   }
 
   // tslint:disable-next-line: typedef
@@ -70,6 +74,10 @@ export class utiles {
   // tslint:disable-next-line: typedef
   static createCacheQuarantine(quarantineLine: Quarantine[]) {
     localStorage.setItem('quarantineLine', JSON.stringify(quarantineLine));
+  }
+
+  static createCacheJournalId(journalId: string) {
+    localStorage.setItem('journalId', JSON.stringify(journalId));
   }
 
   // tslint:disable-next-line: typedef
@@ -109,6 +117,12 @@ export class utiles {
   // tslint:disable-next-line: typedef
   static getCacheLocationQuarantine() {
     const info = localStorage.getItem('locationQuarantine');
+    const data = JSON.parse(info);
+    return data;
+  }
+
+  static getCacheJournalId() {
+    const info = localStorage.getItem('journalId');
     const data = JSON.parse(info);
     return data;
   }
