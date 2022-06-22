@@ -202,6 +202,22 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       }
     }
 
+    if (isCorrect) {
+      let journalCache = utiles.getCacheJournal();
+
+      if (journalCache) {
+        journalCache.forEach(element => {
+          if (element.ItemId === this.itemInformation.ItemId) {
+            isCorrect = false;
+          }
+        });
+      }
+
+      if (!isCorrect) {
+        this.modelInformation('Error', 'El artículo ya existe en las líneas del diario, no se permite agregarlo nuevamente');
+      }
+    }
+
     this.journalList = [];
 
     if (this.journalIdGeneral !== "")
@@ -308,14 +324,9 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       this.processRegister = result.data;
       dialogRef.addPanelClass('ocultar-modal');
-      setTimeout(() => {
-        this.dialog.closeAll();
-      }, 300);
-
       if (this.processRegister === 1) {
-        this.journalProcessRegister();
+      this.journalProcessRegister();
       }
-
     });
   }
 
@@ -336,7 +347,7 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
     }
 
     if (journalIdCache !== '') {
-      this.loading = true;
+      //this.loading = true;
       // tslint:disable-next-line: prefer-const
       let journalLocal = new Journal();
       journalLocal.JournalId = journalIdCache;
@@ -346,9 +357,16 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
           responseJournal => {
-            if (responseJournal) {
+            //if (responseJournal) {
               this.journalResponse = responseJournal;
-              this.loading = false;
+              //this.loading = false;
+
+              let journalId = utiles.getCacheJournalId();
+              let journalGeneral = utiles.getCacheJournal();
+
+              utiles.clearCacheJournal();
+              utiles.clearCacheJournalId();
+
               if (this.journalResponse.MessageType === 'Info') {
                 (document.getElementById('ubicacionOrigen') as HTMLInputElement).value = '';
                 (document.getElementById('ubicacionDestino') as HTMLInputElement).value = '';
@@ -365,20 +383,23 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
                 this.itemInformation.Size = '';
 
                 if (this.journalResponse.Message === 'Se ha registrado el diario de manera correcta') {
-                  utiles.clearCacheJournal();
-                  utiles.clearCacheJournalId();
                   this.journalIdGeneral = '';
+                } else {
+                  utiles.createCacheJournalId(journalId);
+                  utiles.createCacheJournal(journalGeneral);
                 }
-                this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
+
               } else {
-                this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
+                //this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
               }
-            }
+            //}
+            this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
           }
         );
     } else {
       this.modelInformation('Error', 'Se debe agregar primero una línea para registrar un diario de inventario');
     }
+    //this.modelInformation(this.journalResponse.MessageType, this.journalResponse.Message);
   }
 
   // tslint:disable-next-line: typedef
@@ -428,6 +449,13 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: typedef
   goBackAction() {
     this.location.back();
+  }
+
+  CleanCacheData () {
+    utiles.clearCacheJournal();
+    utiles.clearCacheJournalId();
+    this.journalIdGeneral = '';
+    this.modelInformation('Información', 'Se eliminó el diario de memoria. Para iniciar uno nuevo, dele "Agregar"');
   }
 
   ValidationProcess (validationType: number) {
