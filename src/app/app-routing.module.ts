@@ -8,13 +8,17 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: '',
     component: LayoutComponent,
     children: [
-      {
+      /*{
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
-      },
+      },*/
       {
         path: 'login',
         loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
@@ -34,6 +38,10 @@ const routes: Routes = [
       {
         path: 'history',
         loadChildren: () => import('./history/history.module').then(m => m.HistoryModule)
+      },
+      {
+        path: 'operation-report',
+        loadChildren: () => import('./operation-report/operation-report.module').then(m => m.OperationReportModule)
       }
     ]
   },
@@ -45,9 +53,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' })],
+  //imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
