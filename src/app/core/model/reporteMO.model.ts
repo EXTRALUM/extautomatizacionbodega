@@ -1,4 +1,5 @@
 import { modeloEquipo } from "./modeloEquipo.model";
+import { actividadAct } from "./actividadAct.model";
 
 export class reporteMO {
     vEquipoTrabajoId: string;
@@ -7,16 +8,17 @@ export class reporteMO {
     vOprId: string;
     vNombreOpr: string;
     vProdId: string;
-    ListaModelsEquipo: modeloEquipo[];
-    vEquipoTrabajoRefRecId: bigint;
+    vListaModelsEquipo: modeloEquipo[];
+    vEquipoTrabajoRefRecId: number;
     vTipoReporte: string;
-    vPlanProdRefRecId: bigint;
+    vPlanProdRefRecId: number;
     vNumPlanId: string;
     vLote: string;
-    vProdTableRefRecId: bigint;
-    vRouteOprTableRefRecId: bigint;
+    vProdTableRefRecId: number;
+    vRouteOprTableRefRecId: number;
     vCantReportada:number;
     vCantAReportar:number;
+    ActividadAct: actividadAct
     
     constructor() {
         this.vEquipoTrabajoId = '';
@@ -25,15 +27,16 @@ export class reporteMO {
         this.vOprId = '';
         this.vNombreOpr = '';
         this.vProdId = '';
-        this.ListaModelsEquipo = [];
-        this.vEquipoTrabajoRefRecId = BigInt(0);
+        this.vListaModelsEquipo = [];
+        this.vEquipoTrabajoRefRecId = 0;
         this.vTipoReporte = '';
-        this.vPlanProdRefRecId = BigInt(0);
+        this.vPlanProdRefRecId = 0;
         this.vNumPlanId = '';
         this.vLote = '';
-        this.vProdTableRefRecId = BigInt(0);
-        this.vRouteOprTableRefRecId = BigInt(0);
+        this.vProdTableRefRecId = 0;
+        this.vRouteOprTableRefRecId = 0;
         this.vCantReportada = 0;
         this.vCantAReportar = 0;
+        this.ActividadAct = new actividadAct(); 
     }
 }

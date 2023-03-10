@@ -391,7 +391,6 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
   }
 
   DocumentSuggestion() {
-    debugger;
     let puchId, invoiceId;
     let userModel = new LoginModel();
     this.suggestion = new SuggestionModel();

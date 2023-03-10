@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   getOptionSelect() {
     this.optionSelect = [];
     let loginModel = new LoginModel();
-    debugger;
     loginModel = utiles.getCacheLogin();
 
     if (loginModel) {

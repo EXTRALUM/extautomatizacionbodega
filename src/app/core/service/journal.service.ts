@@ -90,7 +90,6 @@ export class JournalService {
   }
 
   LinesToReceive(linesParams: LinesParams) {
-    debugger;
     const url = environment.apiURL + 'GetLinesToReceive';
     let listLocal;
     return this.http.post<any>(url, linesParams, httpOptions)

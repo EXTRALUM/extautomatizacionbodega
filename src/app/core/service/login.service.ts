@@ -17,7 +17,6 @@ export class LoginService {
 
   // tslint:disable-next-line: typedef
   loginUser(model: LoginModel) {
-    debugger;
     // this.common._setLoading(true);
     const url = environment.apiURL + 'Login';
     return this.http.post<any>(url, model, httpOptions)

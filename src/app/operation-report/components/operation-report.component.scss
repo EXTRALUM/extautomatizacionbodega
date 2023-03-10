@@ -1,0 +1,27 @@
+@import'../../core/styes/variables.scss';
+
+.form-clearable-field {
+    width: 100%;
+}
+
+.container-fluid {
+    margin-top: 5.5rem;
+}
+
+.action-button {
+    text-align: center;
+    background-color: $blue-background-label;
+    color: white;
+}
+
+.for-report-color {
+    color: orange;
+}
+
+.reported-color {
+    color: green;
+}
+
+.pieces-qty {
+    font-size: 3rem;
+}
