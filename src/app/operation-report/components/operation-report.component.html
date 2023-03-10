@@ -1,15 +1,121 @@
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
-<p>operation-report works!</p>
+<div class="container-fluid">
+    <form>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Código de Equipo</mat-label>
+                    <input matInput type="text" [(ngModel)]="reporteMoModel.vEquipoTrabajoId" name="equipoId" (change)="getInfoEquipo()">
+                    <button *ngIf="reporteMoModel.vEquipoTrabajoId" matSuffix mat-icon-button aria-label="Clear" (click)="clearEquipo()">
+                    <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" readonly="true" [(ngModel)]="reporteMoModel.vNombreEquipo" name="NombreEquipo">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label># de Colaboradores</mat-label>
+                    <input matInput type="text" readonly="true" [(ngModel)]="reporteMoModel.vCantTrabajadores" name="Trabajadores">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Operación</mat-label>
+                    <input matInput type="text" readonly="true" [(ngModel)]="reporteMoModel.vNombreOpr" name="NombreOpr">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Modelos</mat-label>
+                    <input matInput type="text" readonly="true" [(ngModel)]="vModelosEquipo" name="Modelos">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field" appearance="fill">
+                    <mat-label>Tipo de Reporte</mat-label>
+                    <mat-select [(ngModel)]="reporteMoModel.vTipoReporte" name="TipoReporteOpr">
+                      <mat-option *ngFor="let tipoReporte of vTiposReporte" [value]="tipoReporte">
+                        {{tipoReporte}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[0]" class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Plan Producción</mat-label>
+                    <input [disabled]="!reporteMoModel.vEquipoTrabajoId || reporteMoModel.ActividadAct.vActividad !== ''" matInput type="text" [(ngModel)]="reporteMoModel.vNumPlanId" name="PlanProd" (change)="getInfoByPlan()">
+                    <button *ngIf="reporteMoModel.vNumPlanId" matSuffix mat-icon-button aria-label="Clear" (click)="clearProd()">
+                    <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[0]" class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Carrito</mat-label>
+                    <input matInput type="text" readonly="true" [(ngModel)]="reporteMoModel.vLote" name="Carrito">
+                </mat-form-field>
+            </div>
+            <div *ngIf="reporteMoModel.vTipoReporte !== vTiposReporte[0]" class="col-lg-4 col-md-4 col-sm-6 col-6">
+                <mat-form-field class="form-clearable-field">
+                    <mat-label>Pedido Producción</mat-label>
+                    <input [disabled]="!reporteMoModel.vEquipoTrabajoId" matInput type="text" [(ngModel)]="reporteMoModel.vProdId" name="PedProd" (change)="getInfoByProd()">
+                    <button *ngIf="reporteMoModel.vProdId" matSuffix mat-icon-button aria-label="Clear" (click)="clearProd()">
+                    <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+            <!--*ngIf="reporteMoModel.vProdId || reporteMoModel.vNumPlanId"-->
+            <div class="col-lg-2 col-md-2 col-sm-3 col-3 d-flex justify-content-center">
+                <b class="text-center for-report-color pieces-qty">{{reporteMoModel.vCantAReportar}}</b>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-3 d-flex justify-content-center">
+                <b class="text-center reported-color pieces-qty">{{reporteMoModel.vCantReportada}}</b>
+            </div>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-2 col-sm-3 col-3 d-flex justify-content-center">
+                <b class="text-center for-report-color">Piezas Por Reportar</b>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-3 d-flex justify-content-center">
+                <b class="text-center reported-color">Piezas Reportadas</b>
+            </div>
+        </div>
 
+        <div class="row mt-3 d-flex justify-content-center">
+            <div class="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-center p-0 mr-1">
+                <button [disabled]="!reporteMoModel.vEquipoTrabajoId || !(reporteMoModel.vCantAReportar > 0)" 
+                    mat-raised-button class="action-button" (click)="startOpr(reporteMoModel.vOprId, 'Opr')"><mat-icon>play_arrow</mat-icon>Iniciar
+                </button>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-center p-0 mr-1">
+                <button [disabled]="!reporteMoModel.vEquipoTrabajoId || reporteMoModel.ActividadAct.vInicio === ''" 
+                    mat-raised-button class="action-button" (click)="pauseOpr()">Pausar
+                </button>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-center p-0">
+                <button [disabled]="!reporteMoModel.vEquipoTrabajoId || !(reporteMoModel.vCantAReportar > 0) || reporteMoModel.ActividadAct.vActividad !== reporteMoModel.vOprId || reporteMoModel.ActividadAct.vInicio === ''" 
+                    mat-raised-button class="action-button" (click)="endOpr()">Terminar
+                </button>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-center p-0 ml-1">
+                <button [disabled]="!reporteMoModel.vEquipoTrabajoId || !reporteMoModel.ActividadAct.vActividad"
+                    mat-raised-button class="action-button" (click)="insertDelay()">Retraso
+                </button>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-2 d-flex justify-content-center p-0 ml-1">
+                <button mat-raised-button class="action-button" (click)="clearScreen()">Limpiar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

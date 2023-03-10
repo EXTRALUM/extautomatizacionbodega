@@ -157,7 +157,6 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   getSelectedLocationDestino(event: any) {
     this.bodegaDestino = event.target.value;
   }
-    // debugger;
     // tslint:disable-next-line: max-line-length
     // this.locationString = '[{"LocationId":"04AA00031","LocationName":"VIDRIO LAMINA MATERIA PRIMA"},{"LocationId":"04AC05001","LocationName":"REPUESTOS ESPECIFICOS"}]';
     // this.locationList = JSON.parse(this.locationString);
