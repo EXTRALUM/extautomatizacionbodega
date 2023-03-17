@@ -1,0 +1,23 @@
+@import'../../../core/styes/variables.scss';
+
+.container-fluid {
+    margin-top: 1rem;
+}
+
+.action-button {
+    text-align: center;
+    background-color: $blue-background-label;
+    color: white;
+}
+
+.danger-action-button {
+    text-align: center;
+    color: white;
+}
+
+.label-title {
+    font-size: 1rem;
+    font-family: $opensans-bold;
+    color: #001B36;
+    margin: 1.5rem 0;
+  }

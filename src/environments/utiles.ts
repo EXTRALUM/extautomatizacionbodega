@@ -44,6 +44,14 @@ export class utiles {
     localStorage.removeItem('locationQuarantine');
   }
 
+  static clearCacheReportMO() {
+    localStorage.removeItem('ReportMOModel');
+  }
+
+  static createCacheReportMO(data) {
+    localStorage.setItem('ReportMOModel', JSON.stringify(data));
+  }
+
   // tslint:disable-next-line: typedef
   static createLocationOrigen(locationOrigen: LocationModel) {
     localStorage.setItem('locationOrigen', JSON.stringify(locationOrigen));
@@ -111,5 +119,11 @@ export class utiles {
     const info = localStorage.getItem('locationQuarantine');
     const data = JSON.parse(info);
     return data;
+  }
+
+  static getCacheReportMO() {
+    const reportMO = localStorage.getItem('ReportMOModel');
+    const reportMOModel = JSON.parse(reportMO);
+    return reportMOModel;
   }
 }

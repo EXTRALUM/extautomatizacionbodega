@@ -29,6 +29,5 @@ export class CommonService {
       this.countLoading = 0;
       this.loading.next(item);
     }
-    console.log(this.countLoading);
   }
 }

@@ -60,11 +60,6 @@ export class ModalReceiveComponent implements OnInit {
     this.closeDialog(event);
   }
 
-  printLog(event: LinesToReceive) {
-    console.log('Este es el pedido de compra');
-    console.log(event.PedidoCompra);
-  }
-
   closeDialog(event: LinesToReceive) {
     this.dialogRef.close({
       event: 'close',

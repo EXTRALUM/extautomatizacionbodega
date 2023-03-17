@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { CommonService } from '../../../core/service/common.service';
+import { CommonService } from '../../core/service/common.service';
 
 @Component({
   selector: 'app-loading',

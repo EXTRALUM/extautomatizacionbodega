@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { PieChartModule } from '../pie-chart/pie-chat.module';
+import { LoadingModule } from '../loading/loading.module';
 
 const routes: Routes = [
   {
@@ -34,6 +36,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
+    PieChartModule,
+    LoadingModule,
     NgxLoadingModule.forRoot({})
   ],
   providers: [

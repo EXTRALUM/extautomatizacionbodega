@@ -1,13 +1,19 @@
 export class actividadAct {
     vInicio: string;
     vFin: string;
-    vActividad: string;
+    vOperacion: string;
+    vRetraso: string;
+    vTipoReferencia: string;
     vReferencia: string;
+    vLote: string;
 
     constructor() {
         this.vInicio = '';
         this.vFin = '';
-        this.vActividad = '';
-        this.vReferencia = ''
+        this.vOperacion = '';
+        this.vRetraso = '';
+        this.vTipoReferencia = '';
+        this.vReferencia = '';
+        this.vLote = '';
     }
 }
