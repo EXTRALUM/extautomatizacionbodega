@@ -155,7 +155,6 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
               this.qtyQuarantine = responseItem;
               this.cantRecibida = this.qtyQuarantine.QtyRecibida;
               (document.getElementById('unidadMedida') as HTMLInputElement).value = this.qtyQuarantine.UnidadMedida
-              console.log(this.line.CantidadRecibir);
 
               if (this.line.CantidadRecibir !== 0) {
                 this.cantFacturada = this.line.CantidadRecibir;

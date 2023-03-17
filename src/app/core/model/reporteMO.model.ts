@@ -10,14 +10,16 @@ export class reporteMO {
     vProdId: string;
     vListaModelsEquipo: modeloEquipo[];
     vEquipoTrabajoRefRecId: number;
+    vMetaDiaria: number;
     vTipoReporte: string;
     vPlanProdRefRecId: number;
     vNumPlanId: string;
     vLote: string;
     vProdTableRefRecId: number;
     vRouteOprTableRefRecId: number;
-    vCantReportada:number;
-    vCantAReportar:number;
+    vCantReportada: number;
+    vCantAReportar: number;
+    vCantExcluida: number;
     ActividadAct: actividadAct
     
     constructor() {
@@ -29,6 +31,7 @@ export class reporteMO {
         this.vProdId = '';
         this.vListaModelsEquipo = [];
         this.vEquipoTrabajoRefRecId = 0;
+        this.vMetaDiaria = 0;
         this.vTipoReporte = '';
         this.vPlanProdRefRecId = 0;
         this.vNumPlanId = '';
@@ -37,6 +40,7 @@ export class reporteMO {
         this.vRouteOprTableRefRecId = 0;
         this.vCantReportada = 0;
         this.vCantAReportar = 0;
+        this.vCantExcluida = 0;
         this.ActividadAct = new actividadAct(); 
     }
 }

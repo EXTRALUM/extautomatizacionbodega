@@ -1,0 +1,28 @@
+<div class="container-fluid modal-error pt-1">
+    <div class="row row-not-margin center-content">
+      <label class="label-title form-control-text-aling-center">{{labelTitile}}</label>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-6 d-flex justify-content-center">
+            <mat-form-field class="form-clearable-field" appearance="fill">
+                <mat-select [(ngModel)]="vRetrasoSelect" name="vRetrasoSelect">
+                <mat-option *ngFor="let retraso of listaRetrasos" [value]="retraso.vRetraso">
+                    {{retraso.vRetraso}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row mt-3 d-flex justify-content-center">
+        <div class="col-lg-3 col-md-3 col-sm-5 col-5 d-flex justify-content-center p-0">
+            <button [disabled]="!vRetrasoSelect" mat-raised-button class="action-button" (click)="addDelay()">
+                Aceptar
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-5 col-5 d-flex justify-content-center p-0">
+            <button mat-raised-button class="action-button bg-danger" (click)="close()">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>

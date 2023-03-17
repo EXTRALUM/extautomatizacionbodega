@@ -4,7 +4,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { OperationReportService } from 'src/app/core/service/operationReport.service';
 import { actividadAct } from 'src/app/core/model/actividadAct.model';
-import { IfStmt } from '@angular/compiler';
+import { utiles } from 'src/environments/utiles';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDelaysComponent } from 'src/app/core/modal/modal-delays/modal-delays.component';
 
 @Component({
   selector: 'app-operation-report',
@@ -17,18 +19,25 @@ export class OperationReportComponent implements OnInit, OnDestroy {
   vModelosEquipo: string = '';
   private unsubscribe$ = new Subject<void>();
   vTiposReporte: string[] = [];
+  vPendChartData: any;
+  vCompleteChartData: any;
+  showCharts: boolean;
 
   constructor(
-    private operationRepService: OperationReportService
+    private operationRepService: OperationReportService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnDestroy(): void {    
   }
 
   ngOnInit(): void {
+    let cacheReportModel = utiles.getCacheReportMO();
+    if(cacheReportModel !== undefined && cacheReportModel !== null)
+      this.reporteMoModel = cacheReportModel;
     this.getTiposReporte();
-    debugger;
-    console.log(this.reporteMoModel.vEquipoTrabajoId);
+    this.chargeModelos();
+    this.getInfoGraficos();
   }
 
   getInfoEquipo() {
@@ -38,15 +47,21 @@ export class OperationReportComponent implements OnInit, OnDestroy {
       response => {
         if (response) {
           this.reporteMoModel = Object.assign(response);
-          this.vModelosEquipo = '';
-          this.reporteMoModel.vListaModelsEquipo.forEach(Modelo => {
-            if(this.vModelosEquipo !== '')
-              this.vModelosEquipo += ', ';
-            this.vModelosEquipo += Modelo.vNombreModelo;
-          });
+          this.chargeModelos();
+          this.saveReportMOInfo();
+          this.getInfoGraficos();
         }
       }
     );
+  }
+
+  chargeModelos() {
+    this.vModelosEquipo = '';
+    this.reporteMoModel.vListaModelsEquipo.forEach(Modelo => {
+      if(this.vModelosEquipo !== '')
+        this.vModelosEquipo += ', ';
+      this.vModelosEquipo += Modelo.vNombreModelo;
+    });
   }
 
   getInfoByPlan() {
@@ -61,13 +76,15 @@ export class OperationReportComponent implements OnInit, OnDestroy {
       response => {
         if (response) {
           this.reporteMoModel = Object.assign(response);
+          this.saveReportMOInfo();
+          this.getInfoGraficos();
         }
       }
     );
   }
 
   getTiposReporte() {
-    this.operationRepService.getTiposReporte(this.reporteMoModel)
+    this.operationRepService.getTiposReporte()
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(
       response => {
@@ -94,40 +111,76 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     this.getInfoByProd();
   }
 
-  pauseOpr() {
-    this.operationRepService.cerrarActividad(this.reporteMoModel)
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(
-      response => {
-        if (response) {
-          this.vTiposReporte = response;
+  pauseOpr(openDialog = false) {
+    debugger;
+    if(openDialog) {
+      const dialogRef = this.dialog.open(ModalDelaysComponent, {
+        data: {
+          labelTitile: 'Motivo de Retraso',
+        },
+        panelClass: ['without-padding'],
+          minWidth: '55vh',
+          maxWidth: '60vh',
+          maxHeight: '74vh',
+          minHeight: '40vh',
+          disableClose: true
+      });
+      dialogRef.componentInstance.responseSelect
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((result) => {
+        if(result !== undefined && result.vRetraso !== '') {
+          debugger;
+          if(result.vContabilizaTiempo)
+            this.startOpr(result.vRetraso, 'Retraso');
+          else
+            this.pauseOpr(false);
+          
+          this.saveReportMOInfo();
         }
-      }
-    );
+      });
+    } else {
+      this.operationRepService.cerrarActividad(this.reporteMoModel)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        response => {
+          if (response) {
+            this.reporteMoModel = Object.assign(response);
+            this.saveReportMOInfo();
+          }
+        }
+      );
+    }
   }    
 
   startOpr(_actividad, _tipoAct) {
     let actividadNueva = new actividadAct();
-    actividadNueva.vActividad = _actividad
+    actividadNueva.vOperacion = this.reporteMoModel.vOprId
 
-    if(_tipoAct === 'Opr') {
-        if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[0])//Plan
-          actividadNueva.vReferencia = this.reporteMoModel.vNumPlanId;
-        else
-          actividadNueva.vReferencia = '';
+    actividadNueva.vTipoReferencia = this.reporteMoModel.vTipoReporte;
+    if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[0]) {//Plan
+      actividadNueva.vReferencia = this.reporteMoModel.vNumPlanId;
+      actividadNueva.vLote = this.reporteMoModel.vLote;
+    } else {
+      actividadNueva.vReferencia = this.reporteMoModel.vProdId;
+    }
+    debugger;
+    if(_tipoAct === 'Retraso') {
+      actividadNueva.vRetraso = _actividad;
     }
 
     this.reporteMoModel.ActividadAct = actividadNueva;
-    
-    this.operationRepService.getTiposReporte(this.reporteMoModel)
+    this.operationRepService.iniciarActividad(this.reporteMoModel)
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(
       response => {
         if (response) {
-          this.vTiposReporte = response;
+          this.reporteMoModel = Object.assign(response);
+          this.saveReportMOInfo();
         }
       }
     );
+
+    this.saveReportMOInfo();
   }
 
   endOpr() {
@@ -135,14 +188,55 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(
       response => {
+        debugger;
         if (response) {
-          this.vTiposReporte = response;
+          debugger;
+          this.reporteMoModel = Object.assign(response);
+          this.saveReportMOInfo();
+          this.getInfoGraficos();
         }
       }
     );
   }
 
-  insertDelay() {
+  getInfoPendGrafico() {
+    this.operationRepService.getInfoPendGrafico(this.reporteMoModel)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        response => {
+          if (response) {
+            this.vPendChartData = response;
+          }
+        }
+      );
+  }
 
+  getInfoMetaGrafico() {
+    this.operationRepService.getInfoMetaGrafico(this.reporteMoModel)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        response => {
+          if (response) {
+            this.vCompleteChartData = response;
+          }
+        }
+      );
+  }
+
+  getInfoGraficos() {
+    if(this.reporteMoModel.vNumPlanId || this.reporteMoModel.vProdId) {
+      this.getInfoPendGrafico();
+      this.getInfoMetaGrafico();
+      this.showCharts = true;
+    } else {
+      this.vPendChartData = {};
+      this.vCompleteChartData = {};
+      this.showCharts = false;
+    }
+  }
+
+  saveReportMOInfo() {
+    utiles.clearCacheReportMO();
+    utiles.createCacheReportMO(this.reporteMoModel);
   }
 }

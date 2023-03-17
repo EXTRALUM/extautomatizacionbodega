@@ -29,7 +29,8 @@ import { ModalReceiveComponent } from './core/modal/modal-receive/modal-receive.
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-
+import { ModalDelaysComponent } from './core/modal/modal-delays/modal-delays.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatListModule } from '@angular/material/list';
     ModalInformationComponent,
     ModalLocationComponent,
     ModalConfirmComponent,
-    ModalReceiveComponent
+    ModalReceiveComponent,
+    ModalDelaysComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { MatListModule } from '@angular/material/list';
     FormsModule,
     MatCardModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
   ],
   providers: [DatePipe,
     {
