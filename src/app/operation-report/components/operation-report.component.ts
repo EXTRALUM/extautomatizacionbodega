@@ -61,6 +61,15 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     );
   }
 
+  chargeModelos() {
+    this.vModelosEquipo = '';
+    this.reporteMoModel.vListaModelsEquipo.forEach(Modelo => {
+      if(this.vModelosEquipo !== '')
+        this.vModelosEquipo += ', ';
+      this.vModelosEquipo += Modelo.vNombreModelo;
+    });
+  }
+
   getInfoByPlan() {
     this.reporteMoModel.vProdId = this.reporteMoModel.vNumPlanId;
     this.getInfoByProd();
@@ -182,6 +191,7 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(
       response => {
+        debugger;
         if (response) {
           this.reporteMoModel = Object.assign(response);
           this.saveReportMOInfo();
