@@ -13,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { PieChartModule } from '../pie-chart/pie-chat.module';
 import { LoadingModule } from '../loading/loading.module';
+import { MatExpansionModule } from '@angular/material/expansion'; 
+import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
   {
@@ -38,6 +41,9 @@ const routes: Routes = [
     MatSelectModule,
     PieChartModule,
     LoadingModule,
+    MatExpansionModule,
+    MatListModule,
+    MatTooltipModule,
     NgxLoadingModule.forRoot({})
   ],
   providers: [

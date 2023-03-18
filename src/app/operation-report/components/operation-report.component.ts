@@ -7,6 +7,7 @@ import { actividadAct } from 'src/app/core/model/actividadAct.model';
 import { utiles } from 'src/environments/utiles';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDelaysComponent } from 'src/app/core/modal/modal-delays/modal-delays.component';
+import { ModalTeamModelsComponent } from 'src/app/core/modal/modal-teamModels/modal-teamModels.component';
 
 @Component({
   selector: 'app-operation-report',
@@ -16,7 +17,6 @@ import { ModalDelaysComponent } from 'src/app/core/modal/modal-delays/modal-dela
 
 export class OperationReportComponent implements OnInit, OnDestroy {
   reporteMoModel: reporteMO = new reporteMO();
-  vModelosEquipo: string = '';
   private unsubscribe$ = new Subject<void>();
   vTiposReporte: string[] = [];
   vPendChartData: any;
@@ -28,6 +28,12 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
   ) { }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalTeamModelsComponent, {
+      data: {labelTitile: 'Modelos Asociados', reporteMO: this.reporteMoModel},
+    });
+  }
+
   ngOnDestroy(): void {    
   }
 
@@ -36,7 +42,6 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     if(cacheReportModel !== undefined && cacheReportModel !== null)
       this.reporteMoModel = cacheReportModel;
     this.getTiposReporte();
-    this.chargeModelos();
     this.getInfoGraficos();
   }
 
@@ -47,21 +52,11 @@ export class OperationReportComponent implements OnInit, OnDestroy {
       response => {
         if (response) {
           this.reporteMoModel = Object.assign(response);
-          this.chargeModelos();
           this.saveReportMOInfo();
           this.getInfoGraficos();
         }
       }
     );
-  }
-
-  chargeModelos() {
-    this.vModelosEquipo = '';
-    this.reporteMoModel.vListaModelsEquipo.forEach(Modelo => {
-      if(this.vModelosEquipo !== '')
-        this.vModelosEquipo += ', ';
-      this.vModelosEquipo += Modelo.vNombreModelo;
-    });
   }
 
   getInfoByPlan() {
@@ -107,7 +102,7 @@ export class OperationReportComponent implements OnInit, OnDestroy {
 
   clearScreen() {
     this.reporteMoModel = new reporteMO()
-    this.vModelosEquipo = "";
+    
     this.getInfoByProd();
   }
 

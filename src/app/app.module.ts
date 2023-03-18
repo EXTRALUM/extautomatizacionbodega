@@ -30,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ModalDelaysComponent } from './core/modal/modal-delays/modal-delays.component';
+import { ModalTeamModelsComponent } from './core/modal/modal-teamModels/modal-teamModels.component';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MatSelectModule } from '@angular/material/select';
     ModalConfirmComponent,
     ModalReceiveComponent,
     ModalDelaysComponent,
+    ModalTeamModelsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatButtonModule,
     MatListModule,
+    MatSelectModule
   ],
   providers: [DatePipe,
     {
