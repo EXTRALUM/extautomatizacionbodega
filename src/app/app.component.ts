@@ -7,7 +7,7 @@ import { RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterEvent } from '@
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Automatización de Bodegas';
+  title = 'Automatización de Operaciones';
   public isShowingRouteLoadIndicator: boolean;
 
   constructor(router: Router) {

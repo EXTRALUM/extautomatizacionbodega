@@ -42,3 +42,25 @@
 .row-actividad {
     margin-top: 2rem;
 }
+
+.models-title {
+    font-size: 1rem;
+}
+
+.mat-icon-open{
+    font-size:18px !important;
+}
+
+.btt-open {
+    border: 0px;
+    background-color: white;
+}
+
+.btt-open-enabled {
+    color: $blue-background-label;
+}
+
+.div-open {
+    //border-bottom: 1px gray solid;
+    height: 2.5rem;
+}

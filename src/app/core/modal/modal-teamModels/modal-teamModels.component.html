@@ -1,0 +1,19 @@
+<div class="modal-error">
+    <div class="row row-not-margin center-content mb-0">
+        <label class="label-title form-control-text-aling-center">{{labelTitile}}</label>
+    </div>
+    <div class="row d-flex justify-content-center pt-0 mt-0">
+        <div class="col-12 d-flex justify-content-center">
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let vModelo of vReporteMO.vListaModelsEquipo">{{vModelo.vNombreModelo}}</mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <!--<div class="row mt-2 d-flex justify-content-center">
+        <div class="col-lg-3 col-md-3 col-sm-5 col-5 d-flex justify-content-center p-0">
+            <button mat-raised-button class="action-button" (click)="close()">
+                Cerrar
+            </button>
+        </div>
+    </div>-->
+</div>
