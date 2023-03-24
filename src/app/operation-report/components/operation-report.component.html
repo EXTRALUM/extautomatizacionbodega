@@ -153,20 +153,43 @@
             </div>
         </div>
     </form>
-    <div class="row d-flex justify-content-center charts-row">
-        <div *ngIf="this.showCharts === true" class="col-lg-3 col-md-4 col-sm-6 col-6 mb-2 d-flex justify-content-center">
-            <b class="text-center">Plan Actual</b>
-        </div>
-        <div *ngIf="this.showCharts === true" class="col-lg-3 col-md-4 col-sm-6 col-6 mb-2 d-flex justify-content-center">
-            <b class="text-center">Meta: {{reporteMoModel.vMetaDiaria}}</b>
-        </div>    
-    </div>
-    <div class="row d-flex justify-content-center">
+    <div *ngIf="this.showCharts" class="row d-flex justify-content-center charts-row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-2">
-            <app-pie-chart [chartData]="this.vPendChartData" [chartName]="'Pend'"></app-pie-chart>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">
+                    <b *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[0]" class="text-center">Plan - Carrito</b>
+                    <b *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[1]" class="text-center">Producción</b>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 justify-content-center">
+                    <app-pie-chart [chartData]="this.vPendChartDataByReport" [chartName]="'PendByReport'"></app-pie-chart>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-2">
-            <app-pie-chart [chartData]="this.vCompleteChartData" [chartName]="'Complete'"></app-pie-chart>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 justify-content-center">
+                    <b class="text-center">Plan General</b>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 justify-content-center">
+                    <app-pie-chart [chartData]="this.vPendChartData" [chartName]="'Pend'"></app-pie-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-2">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 justify-content-center">
+                    <b class="text-center">Meta: {{reporteMoModel.vMetaDiaria}}</b>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 justify-content-center">
+                    <app-pie-chart [chartData]="this.vCompleteChartData" [chartName]="'Complete'"></app-pie-chart>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { utiles } from 'src/environments/utiles';
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   optionSelectFormat: OptionSelect[];
 
   constructor(
+    private router: Router,
     private generalOption: GeneralOptionsService
   ) { }
   ngOnDestroy(): void {
@@ -56,6 +58,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
 
     }
+  }
+
+  goToHome() {
+    this.router.navigate(['home']);
   }
 
 }
