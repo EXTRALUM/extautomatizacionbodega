@@ -3,10 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LayoutComponent } from './layout/layout.component';
-import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DatePipe } from '@angular/common';
@@ -32,14 +29,13 @@ import { MatListModule } from '@angular/material/list';
 import { ModalDelaysComponent } from './core/modal/modal-delays/modal-delays.component';
 import { ModalTeamModelsComponent } from './core/modal/modal-teamModels/modal-teamModels.component';
 import { MatSelectModule } from '@angular/material/select';
+import { LayoutModule } from './layout/layout.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     PageNotFoundComponent,
-    LayoutComponent,
-    FooterComponent,
     ModalInformationComponent,
     ModalLocationComponent,
     ModalConfirmComponent,
@@ -66,6 +62,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatButtonModule,
     MatListModule,
+    LayoutModule,
     MatSelectModule
   ],
   providers: [DatePipe,

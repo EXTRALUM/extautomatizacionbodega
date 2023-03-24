@@ -8,6 +8,7 @@ import { utiles } from 'src/environments/utiles';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDelaysComponent } from 'src/app/core/modal/modal-delays/modal-delays.component';
 import { ModalTeamModelsComponent } from 'src/app/core/modal/modal-teamModels/modal-teamModels.component';
+import { ModalInformationComponent } from 'src/app/core/modal/modal-information/modal-information.component';
 
 @Component({
   selector: 'app-operation-report',
@@ -19,6 +20,7 @@ export class OperationReportComponent implements OnInit, OnDestroy {
   reporteMoModel: reporteMO = new reporteMO();
   private unsubscribe$ = new Subject<void>();
   vTiposReporte: string[] = [];
+  vPendChartDataByReport: any;
   vPendChartData: any;
   vCompleteChartData: any;
   showCharts: boolean;
@@ -107,7 +109,6 @@ export class OperationReportComponent implements OnInit, OnDestroy {
   }
 
   pauseOpr(openDialog = false) {
-    debugger;
     if(openDialog) {
       const dialogRef = this.dialog.open(ModalDelaysComponent, {
         data: {
@@ -124,7 +125,6 @@ export class OperationReportComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((result) => {
         if(result !== undefined && result.vRetraso !== '') {
-          debugger;
           if(result.vContabilizaTiempo)
             this.startOpr(result.vRetraso, 'Retraso');
           else
@@ -158,7 +158,6 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     } else {
       actividadNueva.vReferencia = this.reporteMoModel.vProdId;
     }
-    debugger;
     if(_tipoAct === 'Retraso') {
       actividadNueva.vRetraso = _actividad;
     }
@@ -183,12 +182,23 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(
       response => {
-        debugger;
         if (response) {
-          debugger;
           this.reporteMoModel = Object.assign(response);
           this.saveReportMOInfo();
           this.getInfoGraficos();
+          if(this.reporteMoModel.vMsjReporteMO !== "")
+          {
+            const data = {
+              status: 'error',
+              labelTitile: 'Error',
+              textDescription: this.reporteMoModel.vMsjReporteMO
+            };
+              
+            const dialogRef = this.dialog.open(ModalInformationComponent, {
+              data: data,
+              minWidth: '90vw', maxWidth: '90vw', minHeight: '40vh', maxHeight: '40vh'
+            });
+          }
         }
       }
     );
@@ -201,6 +211,18 @@ export class OperationReportComponent implements OnInit, OnDestroy {
         response => {
           if (response) {
             this.vPendChartData = response;
+          }
+        }
+      );
+  }
+
+  getInfoPendGraficoByReport() {
+    this.operationRepService.getInfoPendGraficoByReport(this.reporteMoModel)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        response => {
+          if (response) {
+            this.vPendChartDataByReport = response;
           }
         }
       );
@@ -220,10 +242,12 @@ export class OperationReportComponent implements OnInit, OnDestroy {
 
   getInfoGraficos() {
     if(this.reporteMoModel.vNumPlanId || this.reporteMoModel.vProdId) {
+      this.getInfoPendGraficoByReport();
       this.getInfoPendGrafico();
       this.getInfoMetaGrafico();
       this.showCharts = true;
     } else {
+      this.vPendChartDataByReport = {};
       this.vPendChartData = {};
       this.vCompleteChartData = {};
       this.showCharts = false;

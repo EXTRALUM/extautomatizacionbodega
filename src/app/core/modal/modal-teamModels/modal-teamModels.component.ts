@@ -16,7 +16,6 @@ export class ModalTeamModelsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dataMessage: any,
   ) { 
     if (this.dataMessage !== null && this.dataMessage !== undefined) {
-      debugger;
       this.labelTitile = this.dataMessage.labelTitile;
       this.vReporteMO = this.dataMessage.reporteMO;
     } else {

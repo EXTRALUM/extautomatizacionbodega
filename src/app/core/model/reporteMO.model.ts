@@ -20,6 +20,7 @@ export class reporteMO {
     vCantReportada: number;
     vCantAReportar: number;
     vCantExcluida: number;
+    vMsjReporteMO: string;
     ActividadAct: actividadAct
     
     constructor() {
@@ -41,6 +42,7 @@ export class reporteMO {
         this.vCantReportada = 0;
         this.vCantAReportar = 0;
         this.vCantExcluida = 0;
+        this.vMsjReporteMO = '';
         this.ActividadAct = new actividadAct(); 
     }
 }

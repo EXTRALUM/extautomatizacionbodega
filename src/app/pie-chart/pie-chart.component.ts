@@ -32,7 +32,6 @@ export class PieChartComponent implements OnInit {
   initializeChart() {
     var canvas = document.getElementById(this.divName);
     if(canvas !== null) {
-      debugger;
       canvas.innerHTML = '<canvas id="'+this.chartName+'"></canvas>';
       var myChart = new Chart(this.chartName, {
         type: 'pie',
@@ -52,10 +51,14 @@ export class PieChartComponent implements OnInit {
                 }
                 const totalValue = datapoints.reduce(totalsum, 0);
                 const percent = (value * 100 / totalValue)
-                if(percent > 0)
-                  return percent.toFixed(0)+'%';
-                else
+                if(percent > 0) {
+                  if(percent > Math.trunc(percent))
+                    return percent.toFixed(2)+'%';
+                  else
+                    return percent.toFixed(0)+'%';
+                } else {
                   return '';
+                }
               }
             }
           }

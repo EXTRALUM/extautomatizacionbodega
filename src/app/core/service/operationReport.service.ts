@@ -86,6 +86,16 @@ export class OperationReportService {
       }));
   }
 
+  getInfoPendGraficoByReport(reporteMO) {
+    this.common._setLoading(true);
+    const url = environment.apiURL + 'getInfoPendGraficoByReport';
+    return this.http.post<string>(url, reporteMO, httpOptions)
+      .pipe(map(response => {
+        this.common._setLoading(false);
+        return response;
+      }));
+  }
+
   getInfoMetaGrafico(reporteMO) {
     this.common._setLoading(true);
     const url = environment.apiURL + 'getInfoMetaGrafico';
