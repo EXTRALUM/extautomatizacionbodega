@@ -9,7 +9,7 @@
   </div>
   <div class="row row-not-margin center-content">
     <!-- <div class="col-md-12"> -->
-    <label>{{textDescription}}</label>
+    <label *ngFor="let msjs of this.msjs">{{msjs}}<br></label>
     <!-- </div> -->
   </div>
   <div class="row row-not-margin mt-3 center-content">
