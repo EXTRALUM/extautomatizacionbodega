@@ -186,7 +186,9 @@ export class OperationReportComponent implements OnInit, OnDestroy {
           this.reporteMoModel = Object.assign(response);
           this.saveReportMOInfo();
           this.getInfoGraficos();
-          if(this.reporteMoModel.vMsjReporteMO !== "")
+          if(this.reporteMoModel.vMsjReporteMO !== undefined 
+          && this.reporteMoModel.vMsjReporteMO !== null
+          && this.reporteMoModel.vMsjReporteMO !== "")
           {
             const data = {
               status: 'error',
