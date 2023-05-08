@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path: 'operation-report',
         loadChildren: () => import('./operation-report/operation-report.module').then(m => m.OperationReportModule)
+      },
+      {
+        path: 'warranty',
+        loadChildren: () => import('./Warranty/warranty.module').then(m => m.WarrantyModule)
       }
     ]
   },
