@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { LoginModel } from 'src/app/core/model/login.model';
 import { utiles } from 'src/environments/utiles';
 import { Console } from 'console';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-warranty',
@@ -28,7 +29,7 @@ export class WarrantyComponent implements OnInit {
      { }
 
   ngOnInit(): void {
-    this.Modo = false;
+    this.Modo = true;
     this.NumeroDeSerieNuevo="";
     
     
@@ -44,23 +45,39 @@ export class WarrantyComponent implements OnInit {
           response => {
             if (response) {
               this.warrantyModel = Object.assign(response);
+              this.HabilitarBotones();
             }
           }
         );
+    }else{
+      this.HabilitarBotones();
+    }
+    
+    
+  }
+  
+  HabilitarBotones(){
+    let fecha: Date = new Date(this.warrantyModel.vFechaImpresion);
+    let FechaString: string = fecha.toDateString();
+
+    if(this.warrantyModel.vCustInvoiceID !== ""){
+      if(FechaString === "Sun Dec 31 1899"){
+        this.Modo = false;
+        //Habilitada botones de edición
+      }
+      else{
+        this.Modo = true;
+      }
+    }else{
+
+      this.Modo = true;
     }
   }
 
-  ModoCrear(){
-    
-    this.Modo = false;
-
+  DeshabilitarBotones(){
+      this.Modo = true;
   }
 
-  ModoVer(){
-    
-    this.Modo = true;
-
-  }
   InsertarGarantia(){
     
     if(this.warrantyModel.vCustInvoiceID !== ""){
