@@ -129,6 +129,7 @@ export class WarrantyComponent implements OnInit {
     this.warrantyModel.vColaboradorNombre ='';
     this.warrantyModel.vListaNumeroDeSerie=[];
     this.warrantyModel.vRefRecIDInvoice =0;
+    this.warrantyModel.vSalesID ='';
     this.getGarantia();
   }
 

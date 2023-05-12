@@ -6,6 +6,7 @@ export class warranty {
     vClienteNombre: string;
     vColaboradorNombre: string;
     vCustInvoiceID: string;
+    vSalesID: string;
     vFechaImpresion: Date;
     vFechaGarantia: Date;
     vRefRecIDInvoice: number;
@@ -16,6 +17,7 @@ export class warranty {
         this.vClienteNombre = '';
         this.vColaboradorNombre = '';
         this.vCustInvoiceID = '';
+        this.vSalesID = '';
         this.vFechaImpresion = new Date();
         this.vFechaGarantia = new Date();
         this.vRefRecIDInvoice = 0;
