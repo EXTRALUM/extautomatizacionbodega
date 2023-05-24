@@ -31,14 +31,14 @@ export class WarrantyComponent implements OnInit {
   ngOnInit(): void {
     this.Modo = true;
     this.NumeroDeSerieNuevo="";
-    
-    
   }
 
   getGarantia() {
     if(this.warrantyModel.vCustInvoiceID !== ""){
       this.loginModel = utiles.getCacheLogin();
       this.warrantyModel.vColaboradorNombre = this.loginModel.UserId;
+      this.warrantyModel.vCustInvoiceID = this.warrantyModel.vCustInvoiceID.replace("'", "-"); 
+      
       this.warrantyService.getGarantia(this.warrantyModel)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(
@@ -52,24 +52,19 @@ export class WarrantyComponent implements OnInit {
     }else{
       this.HabilitarBotones();
     }
-    
-    
   }
   
   HabilitarBotones(){
     let fecha: Date = new Date(this.warrantyModel.vFechaImpresion);
     let FechaString: string = fecha.toDateString();
-
     if(this.warrantyModel.vCustInvoiceID !== ""){
       if(FechaString === "Sun Dec 31 1899"){
         this.Modo = false;
-        //Habilitada botones de edición
       }
       else{
         this.Modo = true;
       }
     }else{
-
       this.Modo = true;
     }
   }
@@ -79,7 +74,6 @@ export class WarrantyComponent implements OnInit {
   }
 
   InsertarGarantia(){
-    
     if(this.warrantyModel.vCustInvoiceID !== ""){
       this.loginModel = utiles.getCacheLogin();
       this.ObtenerCantidadNS();
@@ -90,15 +84,14 @@ export class WarrantyComponent implements OnInit {
         response => {
         if (response) {
             this.warrantyModel = Object.assign(response);
+            this.HabilitarBotones();
           }
         }
       );
     }
-
   }
 
   ObtenerCantidadNS(){
-
     this.warrantyModel.vCantidadNS = this.warrantyModel.vListaNumeroDeSerie.length;  
   }
 
@@ -107,17 +100,12 @@ export class WarrantyComponent implements OnInit {
     {
       this.warrantyModel.vListaNumeroDeSerie.push({vNumeroDeSerie: this.NumeroDeSerieNuevo });
       this.NumeroDeSerieNuevo ="";
-
       this.ObtenerCantidadNS();
     }
   }
 
   EliminarNS(NumerodeSerieList: NumerodeSerie){
-
     this.IndexArray = this.warrantyModel.vListaNumeroDeSerie.indexOf(NumerodeSerieList);
-    /*this.warrantyModel.vListaNumeroDeSerie.splice(index,1);
-    
-    */console.log(this.IndexArray);
     this.warrantyModel.vListaNumeroDeSerie = this.warrantyModel.vListaNumeroDeSerie.filter(item => item !== NumerodeSerieList);
     this.ObtenerCantidadNS();
   }

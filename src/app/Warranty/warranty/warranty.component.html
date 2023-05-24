@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <form>        
+    <form (ngSubmit)="getGarantia()">        
         
         <div >
             <div class="row">
@@ -9,34 +9,35 @@
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="mt-1 col-lg-6 col-md-6 col-sm-12 col-12">
                             <mat-form-field class="form-clearable-field">
                                 <mat-label>Referencia</mat-label>
                                 <input matInput type="text" [(ngModel)]="warrantyModel.vCustInvoiceID" name="facturaID" (change)="getGarantia()" >
-                                <button *ngIf="warrantyModel.vCustInvoiceID" matSuffix mat-icon-button aria-label="Clear" (click)="clearFactura()">
+                                <button matSuffix mat-icon-button aria-label="Clear" (click)="clearFactura()">
                                     <mat-icon>close</mat-icon>
                                 </button>
+                                <mat-hint class="ml-3" >Factura, Numero de Serie, Albarán</mat-hint>
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="mt-1 col-lg-6 col-md-6 col-sm-12 col-12">
                             <mat-form-field class="form-clearable-field">
                                 <mat-label>Pedido</mat-label>
                                 <input matInput type="text" readonly="true" [(ngModel)]="warrantyModel.vSalesID" name="Pedido">
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="mt-1 col-lg-6 col-md-6 col-sm-12 col-12">
                             <mat-form-field class="form-clearable-field">
                                 <mat-label>Cliente</mat-label>
                                 <input matInput type="text" readonly="true" [(ngModel)]="warrantyModel.vClienteNombre" name="Cliente">
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="mt-1 col-lg-6 col-md-6 col-sm-12 col-12">
                             <mat-form-field class="form-clearable-field">
                                 <mat-label>Colaborador</mat-label>
                                 <input matInput type="text" readonly="true"  [(ngModel)]="warrantyModel.vColaboradorNombre" name="Colaborador">
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="mt-1 col-lg-6 col-md-6 col-sm-12 col-12">
                             <mat-form-field class="form-clearable-field">
                                 <mat-label>Cantidad Numeros de Serie</mat-label>
                                 <input matInput type="text" readonly="true" [(ngModel)]="warrantyModel.vCantidadNS" name="CantidadNS">
@@ -45,36 +46,43 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    
-                            <mat-list>
-                                <h2>Numero de serie</h2>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-12" [hidden]="Modo">
-                                    <mat-form-field class="form-clearable-field">
-                                        <mat-label>Agregar numero de serie</mat-label>
-                                        <input matInput type="text" name="facturaIDInsert" [(ngModel)]="NumeroDeSerieNuevo">
-                                        <button matSuffix mat-mini-fab color="primary" (click)="AgregarNS()" aria-label="Agregar NS">
-                                        <mat-icon>add</mat-icon>
-                                        </button>
-                                    </mat-form-field>
-                                </div>
-                                <mat-list-item *ngFor="let item of warrantyModel.vListaNumeroDeSerie">
-                                <h4 mat-line>{{item.vNumeroDeSerie}}</h4>
-                                <button matSuffix mat-mini-fab color="warn" (click)="EliminarNS(item)" aria-label="Eliminar NS" [hidden]="Modo">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                                <mat-divider></mat-divider>
-                                </mat-list-item>
-                            </mat-list>
-                        
-                </div>
+                
             </div>
 
-            <div class="row" [hidden]="Modo">
-                <button class="col-lg-1 col-md-6 col-sm-10 col-12" 
-                    mat-raised-button color="primary" (click)="InsertarGarantia()">Guardar</button>
-            </div>
+            
         </div>
 
+    </form>
+
+    <form (ngSubmit)="AgregarNS()">
+        <div class="mx-auto col-lg-11 col-md-11 col-sm-12 col-12">
+                    
+            <mat-list>
+                <h2>Numero de serie</h2>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12" [hidden]="Modo">
+                    <mat-form-field class="form-clearable-field">
+                        <mat-label>Agregar numero de serie</mat-label>
+                        <input matInput type="text" name="NSInput" [(ngModel)]="NumeroDeSerieNuevo">
+                        <button matSuffix mat-mini-fab color="primary" (click)="AgregarNS()" aria-label="Agregar NS">
+                        <mat-icon>add</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <mat-list-item *ngFor="let item of warrantyModel.vListaNumeroDeSerie">
+                <h4 mat-line>{{item.vNumeroDeSerie}}</h4>
+                <button matSuffix mat-mini-fab color="warn" (click)="EliminarNS(item)" aria-label="Eliminar NS" [hidden]="Modo">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        
+        </div>
+
+        <div class="row" [hidden]="Modo">
+            <button class="mt-3 col-lg-1 col-md-6 col-sm-10 col-12" 
+                mat-raised-button color="primary" (click)="InsertarGarantia()">Guardar</button>
+
+        </div>
     </form>
 </div>
