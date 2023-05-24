@@ -36,9 +36,7 @@ export class WarrantyComponent implements OnInit {
   getGarantia() {
     if(this.warrantyModel.vCustInvoiceID !== ""){
       this.loginModel = utiles.getCacheLogin();
-      this.warrantyModel.vColaboradorNombre = this.loginModel.UserId;
-      this.warrantyModel.vCustInvoiceID = this.warrantyModel.vCustInvoiceID.replace("'", "-"); 
-      
+      this.warrantyModel.vColaboradorNombre = this.loginModel.UserId;   
       this.warrantyService.getGarantia(this.warrantyModel)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(
