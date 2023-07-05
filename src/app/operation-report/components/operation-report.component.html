@@ -119,11 +119,11 @@
         </div>
         <div class="row mt-3 d-flex justify-content-center">
             <div class="col-lg-1 col-md-2 col-sm-3 col-3 d-flex justify-content-center p-0 mr-1">
-                <button *ngIf="reporteMoModel.ActividadAct.vOperacion === ''" [disabled]="!reporteMoModel.vEquipoTrabajoId || (!reporteMoModel.vProdId && !reporteMoModel.vNumPlanId) || (reporteMoModel.vCantReportada === reporteMoModel.vCantAReportar && reporteMoModel.vCantAReportar > 0) || reporteMoModel.ActividadAct.vInicio !== ''"
+                <button *ngIf="reporteMoModel.ActividadAct.vOperacion === ''" [disabled]="!reporteMoModel.vEquipoTrabajoId || (!reporteMoModel.vProdId && !reporteMoModel.vNumPlanId) || (reporteMoModel.vCantReportada === reporteMoModel.vCantAReportar && reporteMoModel.vCantReportada > 0) || reporteMoModel.ActividadAct.vInicio !== ''"
                     mat-raised-button class="action-button pl-1 mt-2" (click)="startOpr(reporteMoModel.vOprId, 'Opr')">
                     <mat-icon class="pl-0">play_arrow</mat-icon>&nbsp;Iniciar
                 </button>
-                <button *ngIf="reporteMoModel.ActividadAct.vOperacion !== ''" [disabled]="!reporteMoModel.vEquipoTrabajoId || (!reporteMoModel.vProdId && !reporteMoModel.vNumPlanId) || (reporteMoModel.vCantReportada === reporteMoModel.vCantAReportar && reporteMoModel.vCantAReportar > 0) || reporteMoModel.ActividadAct.vRetraso === ''"
+                <button *ngIf="reporteMoModel.ActividadAct.vOperacion !== ''" [disabled]="!reporteMoModel.vEquipoTrabajoId || (!reporteMoModel.vProdId && !reporteMoModel.vNumPlanId) || (reporteMoModel.vCantReportada === reporteMoModel.vCantAReportar && reporteMoModel.vCantReportada > 0) || reporteMoModel.ActividadAct.vRetraso === ''"
                     mat-raised-button class="action-button pl-1 mt-2" (click)="startOpr(reporteMoModel.vOprId, 'Opr')">
                     <mat-icon class="pl-0">play_arrow</mat-icon>&nbsp;Reanudar
                 </button>
