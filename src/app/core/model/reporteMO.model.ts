@@ -17,6 +17,7 @@ export class reporteMO {
     vLote: string;
     vProdTableRefRecId: number;
     vRouteOprTableRefRecId: number;
+    vCantProd: number;
     vCantReportada: number;
     vCantAReportar: number;
     vCantExcluida: number;
@@ -39,6 +40,7 @@ export class reporteMO {
         this.vLote = '';
         this.vProdTableRefRecId = 0;
         this.vRouteOprTableRefRecId = 0;
+        this.vCantProd = 0;
         this.vCantReportada = 0;
         this.vCantAReportar = 0;
         this.vCantExcluida = 0;
