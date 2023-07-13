@@ -396,46 +396,4 @@ export class QuarantineTransferComponent implements OnInit, OnDestroy {
   goBackAction() {
     this.location.back();
   }
-
-  DocumentSuggestion() {
-    let puchId, invoiceId;
-    let userModel = new LoginModel();
-    this.suggestion = new SuggestionModel();
-    this.filterListString = [];
-    this.filterListString2 = [];
-
-    puchId = (document.getElementById('pedidoCompra') as HTMLInputElement).value;
-    invoiceId = (document.getElementById('numFactura') as HTMLInputElement).value;
-
-    userModel = utiles.getCacheLogin();
-
-    if (puchId !== '' && invoiceId === '') {
-      this.suggestion.DocumentoToCheck = puchId;
-      this.suggestion.UserId = userModel.UserId;
-      this.suggestion.DocumentoType = 'Compra'
-
-    } else if (puchId === '' && invoiceId !== '') {
-      this.suggestion.DocumentoToCheck = invoiceId;
-      this.suggestion.UserId = userModel.UserId;
-      this.suggestion.DocumentoType = 'Factura'
-    }
-
-    this.generalService.DocumentSuggestion(this.suggestion)
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(
-      responseList => {
-          if (responseList) {
-            this.filteredOptions = responseList;
-
-            this.filteredOptions.forEach(element => {
-              if (element.DocumentoResponse.startsWith('COM')) {
-                this.filterListString.push(element.DocumentoResponse)
-              } else {
-                this.filterListString2.push(element.DocumentoResponse)
-              }
-            });
-          }
-        }
-      );
-  }
 }
