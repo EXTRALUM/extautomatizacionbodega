@@ -34,7 +34,6 @@ export class TransferJournalsComponent implements OnInit, OnDestroy {
   journalList: Journal[];
   loading: boolean;
   processRegister: number;
-  journalIdGeneral: string;
 
   // ======================
   bodegaOrigen: string;
