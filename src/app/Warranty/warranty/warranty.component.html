@@ -66,6 +66,7 @@
                         <button matSuffix mat-mini-fab color="primary" (click)="AgregarNS()" aria-label="Agregar NS">
                         <mat-icon>add</mat-icon>
                         </button>
+                        <mat-hint class="ml-3 text-danger" [hidden]="!ValidacionNS" >Ese Numero de Serie ya está en esta Garantía</mat-hint>
                     </mat-form-field>
                 </div>
                 <mat-list-item *ngFor="let item of warrantyModel.vListaNumeroDeSerie">
