@@ -16,6 +16,7 @@ import { formatDate } from '@angular/common';
 })
 export class WarrantyComponent implements OnInit {
   Modo: boolean;
+  ValidacionNS: boolean;
   NumeroDeSerieNuevo: string;
   IndexArray: number;
   loginModel = new LoginModel();
@@ -75,17 +76,19 @@ export class WarrantyComponent implements OnInit {
     if(this.warrantyModel.vCustInvoiceID !== ""){
       this.loginModel = utiles.getCacheLogin();
       this.ObtenerCantidadNS();
-      this.warrantyModel.vColaboradorNombre = this.loginModel.UserId;
-      this.warrantyService.insertGarantia(this.warrantyModel)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(
-        response => {
-        if (response) {
-            this.warrantyModel = Object.assign(response);
-            this.HabilitarBotones();
+      if(this.warrantyModel.vCantidadNS>0){
+        this.warrantyModel.vColaboradorNombre = this.loginModel.UserId;
+        this.warrantyService.insertGarantia(this.warrantyModel)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(
+          response => {
+          if (response) {
+              this.warrantyModel = Object.assign(response);
+              this.HabilitarBotones();
+            }
           }
-        }
-      );
+        );
+      }
     }
   }
 
@@ -96,9 +99,16 @@ export class WarrantyComponent implements OnInit {
   AgregarNS(){
     if(this.NumeroDeSerieNuevo !=="")
     {
-      this.warrantyModel.vListaNumeroDeSerie.push({vNumeroDeSerie: this.NumeroDeSerieNuevo });
-      this.NumeroDeSerieNuevo ="";
-      this.ObtenerCantidadNS();
+      if(this.warrantyModel.vListaNumeroDeSerie.find((obj) => {
+        return obj.vNumeroDeSerie === this.NumeroDeSerieNuevo} )){
+        this.ValidacionNS = true;
+      
+      }else{
+        this.ValidacionNS = false;
+        this.warrantyModel.vListaNumeroDeSerie.push({vNumeroDeSerie: this.NumeroDeSerieNuevo });
+        this.NumeroDeSerieNuevo ="";
+        this.ObtenerCantidadNS();
+      }   
     }
   }
 
