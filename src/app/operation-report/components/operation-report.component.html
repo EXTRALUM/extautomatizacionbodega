@@ -60,25 +60,25 @@
             </div>
         </div>
         <div class="row">
-            <div *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[0]" class="col-lg-4 col-md-4 col-sm-6 col-6">
+            <div *ngIf="reporteMoModel.vTipoReporte !== vTiposReporte[1]" class="col-lg-4 col-md-4 col-sm-6 col-6">
                 <mat-form-field class="form-clearable-field">
                     <mat-label>Plan Producción</mat-label>
-                    <input [readOnly]="!reporteMoModel.vEquipoTrabajoId || reporteMoModel.ActividadAct.vOperacion !== ''" matInput type="text" [(ngModel)]="reporteMoModel.vNumPlanId" name="PlanProd" (change)="getInfoByPlan()">
+                    <input #PlanProdTxt="matInput" [readOnly]="!reporteMoModel.vEquipoTrabajoId || reporteMoModel.ActividadAct.vOperacion !== ''" matInput type="text" [(ngModel)]="reporteMoModel.vNumPlanId" name="PlanProd" (change)="getInfoByPlan()">
                     <button *ngIf="reporteMoModel.vNumPlanId && reporteMoModel.ActividadAct.vOperacion === ''" matSuffix mat-icon-button aria-label="Clear" (click)="clearProd()">
                     <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>
             </div>
-            <div *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[0]" class="col-lg-4 col-md-4 col-sm-6 col-6">
+            <div *ngIf="reporteMoModel.vTipoReporte !== vTiposReporte[1]" class="col-lg-4 col-md-4 col-sm-6 col-6">
                 <mat-form-field class="form-clearable-field">
                     <mat-label>Carrito</mat-label>
                     <input matInput type="text" readonly="true" [(ngModel)]="reporteMoModel.vLote" name="Carrito">
                 </mat-form-field>
             </div>
-            <div *ngIf="reporteMoModel.vTipoReporte !== vTiposReporte[0]" class="col-lg-4 col-md-4 col-sm-6 col-6">
+            <div *ngIf="reporteMoModel.vTipoReporte === vTiposReporte[1]" class="col-lg-4 col-md-4 col-sm-6 col-6">
                 <mat-form-field class="form-clearable-field">
                     <mat-label>Pedido Producción</mat-label>
-                    <input [readOnly]="!reporteMoModel.vEquipoTrabajoId || reporteMoModel.ActividadAct.vOperacion !== ''" matInput type="text" [(ngModel)]="reporteMoModel.vProdId" name="PedProd" (change)="getInfoByProd()">
+                    <input #ProdTxt="matInput" [readOnly]="!reporteMoModel.vEquipoTrabajoId || reporteMoModel.ActividadAct.vOperacion !== ''" matInput type="text" [(ngModel)]="reporteMoModel.vProdId" name="PedProd" (change)="getInfoByProd()">
                     <button *ngIf="reporteMoModel.vProdId && reporteMoModel.ActividadAct.vOperacion === ''" matSuffix mat-icon-button aria-label="Clear" (click)="clearProd()">
                     <mat-icon>close</mat-icon>
                     </button>
