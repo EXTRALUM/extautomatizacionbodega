@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { reporteMO } from 'src/app/core/model/reporteMO.model';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDelaysComponent } from 'src/app/core/modal/modal-delays/modal-delays.component';
 import { ModalTeamModelsComponent } from 'src/app/core/modal/modal-teamModels/modal-teamModels.component';
 import { ModalInformationComponent } from 'src/app/core/modal/modal-information/modal-information.component';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-operation-report',
@@ -24,6 +25,9 @@ export class OperationReportComponent implements OnInit, OnDestroy {
   vPendChartData: any;
   vCompleteChartData: any;
   showCharts: boolean;
+
+  @ViewChild('PlanProdTxt') vPlanProdTxt: MatInput;
+  @ViewChild('ProdTxt') vProdTxt: MatInput;
 
   constructor(
     private operationRepService: OperationReportService,
@@ -54,6 +58,22 @@ export class OperationReportComponent implements OnInit, OnDestroy {
       response => {
         if (response) {
           this.reporteMoModel = Object.assign(response);
+
+          if(this.reporteMoModel.vEquipoTrabajoRefRecId != 0)
+          {
+            //Se solicita que de manera default traiga reporte por plan
+            if(this.reporteMoModel.vPlanProdRefRecId === 0
+            && this.reporteMoModel.vProdTableRefRecId === 0)
+            {
+              this.reporteMoModel.vTipoReporte = this.vTiposReporte[0];//Plan
+            }
+            
+            if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[0])//Plan
+              this.vPlanProdTxt.focus();
+            else if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[1])//Prod
+              this.vProdTxt.focus();
+          }
+
           this.saveReportMOInfo();
           this.getInfoGraficos();
         }
