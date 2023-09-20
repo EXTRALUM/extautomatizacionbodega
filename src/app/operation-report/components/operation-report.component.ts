@@ -28,6 +28,7 @@ export class OperationReportComponent implements OnInit, OnDestroy {
 
   @ViewChild('PlanProdTxt') vPlanProdTxt: MatInput;
   @ViewChild('ProdTxt') vProdTxt: MatInput;
+  @ViewChild('LoteTxt') vLoteTxt: MatInput;
 
   constructor(
     private operationRepService: OperationReportService,
@@ -72,6 +73,8 @@ export class OperationReportComponent implements OnInit, OnDestroy {
               this.vPlanProdTxt.focus();
             else if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[1])//Prod
               this.vProdTxt.focus();
+            else if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[2])//Lote
+              this.vLoteTxt.focus();
           }
 
           this.saveReportMOInfo();
@@ -83,6 +86,11 @@ export class OperationReportComponent implements OnInit, OnDestroy {
 
   getInfoByPlan() {
     this.reporteMoModel.vProdId = this.reporteMoModel.vNumPlanId;
+    this.getInfoByProd();
+  }
+
+  getInfoByLoteOptimiza() {
+    this.reporteMoModel.vProdId = this.reporteMoModel.vLotePerfilId;
     this.getInfoByProd();
   }
 
@@ -175,9 +183,12 @@ export class OperationReportComponent implements OnInit, OnDestroy {
     if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[0]) {//Plan
       actividadNueva.vReferencia = this.reporteMoModel.vNumPlanId;
       actividadNueva.vLote = this.reporteMoModel.vLote;
-    } else {
+    } else if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[1]) {//Prod
       actividadNueva.vReferencia = this.reporteMoModel.vProdId;
+    } else if(this.reporteMoModel.vTipoReporte === this.vTiposReporte[2]) {//Lote Perfil
+      actividadNueva.vReferencia = this.reporteMoModel.vLotePerfilId;
     }
+
     if(_tipoAct === 'Retraso') {
       actividadNueva.vRetraso = _actividad;
     }
@@ -264,7 +275,7 @@ export class OperationReportComponent implements OnInit, OnDestroy {
   }
 
   getInfoGraficos() {
-    if(this.reporteMoModel.vNumPlanId || this.reporteMoModel.vProdId) {
+    if(this.reporteMoModel.vNumPlanId || this.reporteMoModel.vProdId || this.reporteMoModel.vLotePerfilId) {
       this.getInfoPendGraficoByReport();
       this.getInfoPendGrafico();
       this.getInfoMetaGrafico();
