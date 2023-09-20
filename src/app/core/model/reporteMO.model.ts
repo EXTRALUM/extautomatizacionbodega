@@ -16,6 +16,8 @@ export class reporteMO {
     vNumPlanId: string;
     vLote: string;
     vProdTableRefRecId: number;
+    vLotePerfilId: string;
+    vLotePerfilRefRecId: number;
     vRouteOprTableRefRecId: number;
     vCantProd: number;
     vCantReportada: number;
@@ -39,6 +41,8 @@ export class reporteMO {
         this.vNumPlanId = '';
         this.vLote = '';
         this.vProdTableRefRecId = 0;
+        this.vLotePerfilId = '';
+        this.vLotePerfilRefRecId = 0;
         this.vRouteOprTableRefRecId = 0;
         this.vCantProd = 0;
         this.vCantReportada = 0;
