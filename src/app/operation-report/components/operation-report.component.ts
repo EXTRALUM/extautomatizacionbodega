@@ -64,7 +64,8 @@ export class OperationReportComponent implements OnInit, OnDestroy {
           {
             //Se solicita que de manera default traiga reporte por plan
             if(this.reporteMoModel.vPlanProdRefRecId === 0
-            && this.reporteMoModel.vProdTableRefRecId === 0)
+            && this.reporteMoModel.vProdTableRefRecId === 0
+            && this.reporteMoModel.vLotePerfilRefRecId === 0)
             {
               this.reporteMoModel.vTipoReporte = this.vTiposReporte[0];//Plan
             }
